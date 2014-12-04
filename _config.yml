@@ -6,5 +6,6 @@ exclude:
 permalink: pretty
 markdown: kramdown
 sr:
-  year: 2015
+  year: 2015 # which year of SR are we? (the year of the next competition)
+  openings: false # are there open slots for accepting teams for this year?
 
