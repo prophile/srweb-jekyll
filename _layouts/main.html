@@ -5,6 +5,9 @@
     <meta charset="utf-8">
     <meta name="description" content="{{ page.description }}">
     <link rel="stylesheet" type="text/css" href="/css/main.css">
+    {% for extra_sheet in page.extra_css %}
+      <link rel="stylesheet" type="text/css" href="/css/{{ extra_sheet }}.css">
+    {% endfor %}
   </head>
   <body>
     <div id="pageWrapper">
