@@ -5,4 +5,6 @@ exclude:
   - LICENSE
 permalink: pretty
 markdown: kramdown
+sr:
+  year: 2015
 
