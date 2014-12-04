@@ -10,6 +10,7 @@
       <link rel="stylesheet" type="text/css" href="/css/{{ extra_sheet }}.css">
     {% endfor %}
     <link rel="shortcut icon" href="/images/template/favicon.ico">
+    <link rel="alternate" type="application/rss+xml" title="SR RSS" href="/feed.xml">
   </head>
   <body>
     <div id="pageWrapper">
@@ -48,6 +49,9 @@
         {{ content }}
       </div>
       <div id="footer">
+        <a class="rss" href="/feed.xml">
+          <img src="/images/template/feed25x25.png" alt="RSS" title="SR RSS Latest News Feed">
+        </a>
         <a class="facebook" href="https://www.facebook.com/StudentRobotics">
           <img src="/images/template/facebook25x25.png" alt="Facebook" title="SR Facebook page">
         </a>
