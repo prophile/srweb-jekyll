@@ -1,0 +1,8 @@
+exclude:
+  - README.md
+  - AUTHORS
+  - utils
+  - LICENSE
+permalink: pretty
+markdown: kramdown
+
