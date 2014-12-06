@@ -3,6 +3,8 @@ exclude:
   - AUTHORS
   - utils
   - LICENSE
+  - Gemfile
+  - Gemfile.lock
 permalink: pretty
 markdown: kramdown
 
