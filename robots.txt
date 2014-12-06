@@ -1,0 +1,13 @@
+Sitemap: https://www.studentrobotics.org/sitemap.xml
+User-agent: *
+Disallow: /content/
+Disallow: /piwik/
+Disallow: /git/
+Disallow: /cgit/*?h=
+Disallow: /cgit/*?id=
+Disallow: /cgit/*/commit/
+Disallow: /cgit/*/diff/
+Disallow: /cgit/*/refs/
+Disallow: /.git/
+Disallow: /ide/
+Disallow: /forum/
