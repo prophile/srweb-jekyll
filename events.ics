@@ -8,7 +8,7 @@ METHOD:PUBLISH
 BEGIN:VEVENT
 UID:{{ event.url }}
 ORGANIZER;CN="Student Robotics":MAILTO:info@studentrobotics.org
-LOCATION:{{ event.geo | join: ';' }}
+GEO:{{ event.geo | join: ';' }}
 SUMMARY:{{ event.title }}
 CLASS:PUBLIC
 DTSTART;VALUE=DATE:{% event_date event ics %}
