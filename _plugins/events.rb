@@ -65,7 +65,7 @@ module EventsSubsystem
             end
 
             branches = branches.to_a
-            branches.sort_by!{:length}
+            branches.sort_by! { |branch| -branch.length }
 
             # Open the div
             content << '<div id="date_tabs">'
