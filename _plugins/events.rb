@@ -15,16 +15,32 @@ module EventsSubsystem
         "#{day}<sup>#{suffix[day]}</sup> #{months[month]}, #{year}"
     end
 
+    def self.format_date_iso8601(year, month, day)
+        "#{year}-#{month}-#{day}"
+    end
+
     class GetDate < Liquid::Tag
         MATCHER = /^.*\/(\d+)-(\d+)-(\d+)-(.*)\..*$/
 
-        def initialize(tag_name, markup, options)
+        def initialize(tag_name, text, options)
             super
+
+            tokens = text.split(' ')
+            event_name = tokens[0]
+
+            format = tokens[1]
+            @event_name = if event_name.nil? || event_name.empty? then nil else event_name end
+            @format = if format.nil? || format.empty? then nil else format end
         end
 
         def render(context)
-            m, year, month, day, slug = *context['page']['relative_path'].match(MATCHER)
-            EventsSubsystem::format_date(year, month, day)
+            page = if @event_name then context[@event_name] else context['page'] end
+            m, year, month, day, slug = *page['relative_path'].match(MATCHER)
+            if @format == 'iso8601' then
+                EventsSubsystem::format_date_iso8601(year, month, day)
+            else
+                EventsSubsystem::format_date(year, month, day)
+            end
         end
     end
 
@@ -108,4 +124,3 @@ Liquid::Template.register_tag('home_events',
                               EventsSubsystem::HomeEvents)
 Liquid::Template.register_tag('event_date',
                               EventsSubsystem::GetDate)
-

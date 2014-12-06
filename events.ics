@@ -1,0 +1,17 @@
+---
+---
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:https://www.studentrobotics.org
+METHOD:PUBLISH
+{% for event in site.events %}
+BEGIN:VEVENT
+UID:{{ event.url }}
+ORGANIZER;CN="Student Robotics":MAILTO:info@studentrobotics.org
+LOCATION:{{ event.geo | join: ';' }}
+SUMMARY:{{ event.title }}
+CLASS:PUBLIC
+DTSTART;VALUE=DATE:{% event_date event iso8601 %}
+END:VEVENT
+{% endfor %}
+END:VCALENDAR

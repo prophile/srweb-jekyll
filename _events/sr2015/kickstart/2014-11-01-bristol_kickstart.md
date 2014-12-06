@@ -3,6 +3,7 @@ title: "Kickstart 2015"
 description: Bristol Kickstart, SR2015
 layout: event
 branch: Bristol
+geo: [51.4558822, -2.6030123]
 ---
 
 What: [Kickstart](/events/kickstart).
