@@ -29,23 +29,62 @@ module EventsSubsystem
         def render(context)
             sr_year = context['site']['sr']['year']
 
-            kickstarts = []
-            tech_days = []
-            competitions = []
+            branches = Set.new
 
             context['site']['events'].each do |event|
-                m, cats, date, slug = *event.cleaned_relative_path.match(MATCHER)
-                cats = cats.split('/').drop(1)
-                # filter by year
-                next unless cats.include? "sr#{sr_year}"
-                formatted_event = "<a href=\"#{event.url}\">#{date}</a><br>"
-                kickstarts   << formatted_event if cats.include? "kickstart"
-                tech_days    << formatted_event if cats.include? "tech_day"
-                competitions << formatted_event if cats.include? "competition"
+                branches << event.data['branch'] if event.data['branch']
             end
-            ("<h4>Kickstart</h4>" + make_list(kickstarts) +
-             "<h4>Tech Days</h4>" + make_list(tech_days) +
-             "<h4>Competition</h4>" + make_list(competitions))
+
+            content = []
+
+            events = lambda do |dfl, &predicate|
+                matched_any = false
+                content << '<ul>'
+                context['site']['events'].each do |event|
+                    m, cats, date, slug = *event.cleaned_relative_path.match(MATCHER)
+                    cats = cats.split('/').drop(1)
+                    # filter by year
+                    next unless cats.include? "sr#{sr_year}"
+                    # filter by passed condition
+                    next unless predicate.call(cats, event.data['branch'])
+                    formatted_event = "<li><a href=\"#{event.url}\">#{date}</a></li>"
+                    content << formatted_event
+                    matched_any = true
+                end
+                content << "<li>#{dfl}</li>" unless matched_any
+                content << '</ul>'
+            end
+
+            branches = branches.to_a
+            branches.sort!
+
+            # Open the div
+            content << '<div id="date_tabs">'
+            content << '<ul>'
+            branches.each do |branch|
+                content << "<li><a href=\"#date_#{branch}\">#{branch}</a></li>"
+            end
+            content << '</ul>'
+            branches.each do |branch|
+                content << "<div id=\"date_#{branch}\">"
+                content << '<a href="/events/kickstart">Kickstart:</a>'
+                events.call("Not hosted here") { |cats, event_branch|
+                    event_branch == branch && cats.include?('kickstart')
+                }
+                content << '<a href="/events/tech_days">Tech Days:</a>'
+                events.call("TBA") { |cats, event_branch|
+                    event_branch == branch && cats.include?('tech_day')
+                }
+                content << "</div>"
+            end
+            content << '</div>'
+            content << '<div>'
+            content << '<a href="/events/competition">Competition:</a>'
+            events.call("April #{sr_year}") { |cats, event_branch|
+                cats.include?('competition')
+            }
+            content << '</div>'
+            content.join "\n"
         end
 
         private
