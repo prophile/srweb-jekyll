@@ -11,7 +11,7 @@ ORGANIZER;CN="Student Robotics":MAILTO:info@studentrobotics.org
 LOCATION:{{ event.geo | join: ';' }}
 SUMMARY:{{ event.title }}
 CLASS:PUBLIC
-DTSTART;VALUE=DATE:{% event_date event iso8601 %}
+DTSTART;VALUE=DATE:{% event_date event ics %}
 END:VEVENT
 {% endfor %}
 END:VCALENDAR

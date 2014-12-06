@@ -15,8 +15,8 @@ module EventsSubsystem
         "#{day}<sup>#{suffix[day]}</sup> #{months[month]}, #{year}"
     end
 
-    def self.format_date_iso8601(year, month, day)
-        "#{year}-#{month}-#{day}"
+    def self.format_date_ics(year, month, day)
+        "#{year}#{month}#{day}"
     end
 
     class GetDate < Liquid::Tag
@@ -36,8 +36,8 @@ module EventsSubsystem
         def render(context)
             page = if @event_name then context[@event_name] else context['page'] end
             m, year, month, day, slug = *page['relative_path'].match(MATCHER)
-            if @format == 'iso8601' then
-                EventsSubsystem::format_date_iso8601(year, month, day)
+            if @format == 'ics' then
+                EventsSubsystem::format_date_ics(year, month, day)
             else
                 EventsSubsystem::format_date(year, month, day)
             end
