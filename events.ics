@@ -9,6 +9,7 @@ BEGIN:VEVENT
 UID:{{ event.url }}
 ORGANIZER;CN="Student Robotics":MAILTO:info@studentrobotics.org
 GEO:{{ event.geo | join: ';' }}
+LOCATION:{% reverse_geocode event.geo %}
 SUMMARY:{{ event.title }}
 CLASS:PUBLIC
 DTSTART;VALUE=DATE:{% event_date event ics %}
