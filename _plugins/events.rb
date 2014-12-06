@@ -1,4 +1,20 @@
 module EventsSubsystem
+    def self.format_date(year, month, day)
+        year  = year.to_i
+        month = month.to_i
+        day   = day.to_i
+
+        months = %w[?? January February March
+                    April May June
+                    July August September
+                    October November December]
+        suffix = %w[th st nd rd th th th th th th
+                    th th th th th th th th th th
+                    th st nd rd th th th th th th
+                    th st]
+        "#{day}<sup>#{suffix[day]}</sup> #{months[month]}, #{year}"
+    end
+
     class GetDate < Liquid::Tag
         MATCHER = /^.*\/(\d+)-(\d+)-(\d+)-(.*)\..*$/
 
@@ -8,20 +24,12 @@ module EventsSubsystem
 
         def render(context)
             m, year, month, day, slug = *context['page']['relative_path'].match(MATCHER)
-            months = %w[?? January February March
-                        April May June
-                        July August September
-                        October November December]
-            suffix = %w[th st nd rd th th th th th th
-                        th th th th th th th th th th
-                        th st nd rd th th th th th th
-                        th st]
-            "#{day}<sup>#{suffix[day.to_i]}</sup> #{months[month.to_i]}, #{year}"
+            EventsSubsystem::format_date(year, month, day)
         end
     end
 
     class HomeEvents < Liquid::Tag
-        MATCHER = /^(\/.+)*\/(\d+-\d+-\d+)-(.*)$/
+        MATCHER = /^(\/.+)*\/(\d+)-(\d+)-(\d+)-(.*)$/
         def initialize(tag_name, markup, options)
             super
         end
@@ -41,13 +49,14 @@ module EventsSubsystem
                 matched_any = false
                 content << '<ul>'
                 context['site']['events'].each do |event|
-                    m, cats, date, slug = *event.cleaned_relative_path.match(MATCHER)
+                    m, cats, year, month, day, slug = *event.cleaned_relative_path.match(MATCHER)
                     cats = cats.split('/').drop(1)
                     # filter by year
                     next unless cats.include? "sr#{sr_year}"
                     # filter by passed condition
                     next unless predicate.call(cats, event.data['branch'])
-                    formatted_event = "<li><a href=\"#{event.url}\">#{date}</a></li>"
+                    pretty_date = EventsSubsystem::format_date(year, month, day)
+                    formatted_event = "<li><a href=\"#{event.url}\">#{pretty_date}</a></li>"
                     content << formatted_event
                     matched_any = true
                 end
@@ -56,7 +65,7 @@ module EventsSubsystem
             end
 
             branches = branches.to_a
-            branches.sort!
+            branches.sort_by!{:length}
 
             # Open the div
             content << '<div id="date_tabs">'
