@@ -1,7 +1,10 @@
 ---
 layout: main
+extra_css:
+  - news-article
 ---
 <a class="link-top" href="/news">Back to News</a>
+<span class="pubdate">Published: {{page.date | date: "%-d %B %Y"}}</span>
 <h1>{{ page.title }}</h1>
 {{ content }}
 

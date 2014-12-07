@@ -1,0 +1,6 @@
+div.content span.pubdate {
+	margin-top: 15px;
+	font-weight: bold;
+	color: gray;
+	float: right;
+}
