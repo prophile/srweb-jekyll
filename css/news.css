@@ -1,0 +1,67 @@
+div.content div.newsItem {
+	height:auto;
+	overflow:hidden;
+	margin-bottom:15px;
+	clear:both;
+}
+
+div.content div.newsDate {
+	background:#0d1f61;
+	color:white;
+	float:left;
+	width:60px;
+	position:relative;
+	margin-top:5px;
+}
+
+div.content > div.newsItem > div.newsContent > h2 {
+	margin-top:0px;
+}
+
+div.content div.newsDate div {
+	float:left;
+	width:60px;
+	text-align:center;
+	display:block;
+}
+
+div.content div.newsDate div.day {
+	font-size:40px;
+	line-height:40px;
+	margin-top:5px;
+	font-weight:bolder;
+	letter-spacing:3px;
+	margin-left:2px;
+}
+
+div.content div.newsDate div.month {
+	letter-spacing:5px;
+	text-transform:uppercase;
+	font-size:16px;
+	line-height:14px;
+	margin-left:3px;
+}
+
+div.content div.newsDate div.year {
+	letter-spacing:5px;
+	font-size:14px;
+	line-height:14px;
+	margin-top:5px;
+	margin-bottom:4px;
+	margin-left:3px;
+}
+
+div.content div.newsContent {
+	margin-left:70px;
+	border-bottom:1px dashed silver;
+}
+
+div.content div.newsInfo {
+	color:silver;
+	font-size:0.8em;
+	float:right;
+}
+
+div.content div.newsInfo a {
+	color:silver;
+}
