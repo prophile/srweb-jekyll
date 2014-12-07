@@ -1,0 +1,25 @@
+---
+layout: main
+---
+<h1>Key Dates for SR{{ site.sr.year }}</h1>
+<h2>Kickstart</h2>
+<p><a href="/events/kickstart">Kickstart</a> is when you will learn about the game, and receive the kit.</p>
+<p>For SR{{ site.sr.year }} the dates are as below. We expect to confirm the particulars of each event at the start of the academic year.</p>
+
+{% for branch in site.sr.branches %}
+<h3>{{ branch }}</h3>
+{% events_list kickstart, branch, Not hosted here, true %}
+{% endfor %}
+
+<h2>Tech Days</h2>
+
+<p><a href="/events/tech_days">Tech Days</a> take place throughout the year to help you along with the design and development of your robot.</p>
+
+{% for branch in site.sr.branches %}
+<h3>{{ branch }}</h3>
+{% events_list tech_day, branch, TBA, true %}
+{% endfor %}
+
+<h2>Competition</h2>
+{% events_list competition, all, Date TBC, true %}
+

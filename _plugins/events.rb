@@ -1,3 +1,5 @@
+require 'geocoder'
+
 module EventsSubsystem
     def self.format_date(year, month, day)
         year  = year.to_i
@@ -73,7 +75,17 @@ module EventsSubsystem
                 # filter by type
                 next unless cats.include? @type
                 pretty_date = EventsSubsystem::format_date(year, month, day)
-                formatted_event = "<li><a href=\"#{event.url}\">#{pretty_date}</a></li>"
+                if @incl_locations.rstrip == "true" then
+                    loc = event.data['geo']
+                    search_data = Geocoder.search(loc)[0].data
+                    name = nil
+                    search_data['address_components'].each do |component|
+                        name = component['short_name'] if component['types'].include?('establishment')
+                    end
+                    name = search_data['formatted_address'] if name.nil?
+                    extra_goo = ", #{name}"
+                end
+                formatted_event = "<li><a href=\"#{event.url}\">#{pretty_date}</a>#{extra_goo}</li>"
                 content << formatted_event
                 matched_any = true
             end
