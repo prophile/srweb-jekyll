@@ -3,7 +3,7 @@ title: "Kickstart 2015"
 description: Southampton Kickstart, SR2015
 layout: event
 branch: Southampton
-geo: [50.936452, -1.3959699]
+geo: University of Southampton
 ---
 
 What: [Kickstart](/events/kickstart).
