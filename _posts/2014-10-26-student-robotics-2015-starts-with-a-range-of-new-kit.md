@@ -28,7 +28,7 @@ These upgrades include:
 
 ### Power Board
 
-<img class="right" src="/images/content/kit/pbv4.png" height=300 width=241 title="A new Power Board (version 4)" alt="An image of the Power Board version 4">
+<img class="right" src="/images/content/kit/pbv4.png" height="300" width="241" title="A new Power Board (version 4)" alt="An image of the Power Board version 4">
 
 This year comes with an all new [Power Board](/docs/kit/power_board) which allows for the control of up to six external powered components.
 
@@ -46,7 +46,7 @@ We are also working on streaming the camera and having control over individual c
 
 ### Servo Board
 
-<img class="right" src="/images/content/kit/sbv4.png" height=281 width=241 title="A new Servo Board (version 4)" alt="An image of the Servo Board version 4">
+<img class="right" src="/images/content/kit/sbv4.png" height="281" width="241" title="A new Servo Board (version 4)" alt="An image of the Servo Board version 4">
 
 The new [Servo Board](/docs/kit/servo_board) allows for control over up to 12 servos simultaneously.
 
