@@ -2,6 +2,7 @@ import argparse
 import yaml
 import sys
 import re
+from itertools import islice
 
 parser = argparse.ArgumentParser()
 parser.add_argument('source', help='Path to source file',
@@ -10,11 +11,15 @@ parser.add_argument('-o', '--output', type=argparse.FileType('w'),
                     default=sys.stdout, help='Output file')
 parser.add_argument('-l', '--layout', help='Page layout',
                     default='main')
+parser.add_argument('-s', '--strip-header', help='Strip header',
+                    action='store_true')
 arguments = parser.parse_args()
 
 PRE_START_REGEX = re.compile('^<pre><code class="override-lang ([a-z0-9_-]+)">(.*)')
 def transliterate_markdown(src, dst):
     in_code_block = False
+    if arguments.strip_header:
+        src = islice(src, 3, None)
     for line in src:
         if line.startswith('~~~'):
             in_code_block = not in_code_block
