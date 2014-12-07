@@ -2,5 +2,12 @@
 layout: main
 ---
 <h1>{{ page.title }}</h1>
+<div class="event-box">
+  <iframe width="400" height="400"
+          frameborder="0" style="border:0"
+          src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCP7rr-Ch7FW_x7aYNKnsNBXvfb9wHIQdc&q={% reverse_geocode page.geo, geo %}&zoom=13">
+  </iframe>
+  <p class="address">{% reverse_geocode page.geo, html_address %}</p>
+</div>
 {{ content }}
 

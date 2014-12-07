@@ -14,6 +14,8 @@ module GeoSubsystem
             case @component
             when "address"
               raw_data['formatted_address']
+            when "html_address"
+              raw_data['formatted_address'].split(',').join('<br>')
             when "geo"
               coords = raw_data['geometry']['location']
               "#{coords['lat']},#{coords['lng']}"

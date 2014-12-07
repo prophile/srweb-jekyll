@@ -455,3 +455,10 @@ div#footer span.copyright {
 	text-align:center;
 	text-shadow:1px 1px 1px #fff;
 }
+
+div.event-box {
+	float: right;
+	width: 400px;
+	padding: 1em;
+	margin-left: 2em;
+}
