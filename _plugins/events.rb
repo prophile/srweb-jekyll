@@ -51,14 +51,9 @@ module EventsSubsystem
         end
 
         def render(context)
-            sr_year = context['site']['sr']['year']
+            sr_year = context['site.sr.year']
 
-            branches = Set.new
-
-            context['site']['events'].each do |event|
-                branches << event.data['branch'] if event.data['branch']
-            end
-
+            branches = context['site.sr.branches']
             content = []
 
             events = lambda do |dfl, &predicate|
@@ -79,9 +74,6 @@ module EventsSubsystem
                 content << "<li>#{dfl}</li>" unless matched_any
                 content << '</ul>'
             end
-
-            branches = branches.to_a
-            branches.sort_by! { |branch| -branch.length }
 
             # Open the div
             content << '<div id="date_tabs">'
