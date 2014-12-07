@@ -46,8 +46,11 @@ module EventsSubsystem
 
     class HomeEvents < Liquid::Tag
         MATCHER = /^(\/.+)*\/(\d+)-(\d+)-(\d+)-(.*)$/
+        SYNTAX = /(.*)[[:blank:]]*,[[:blank:]]*(.*)[[:blank:]]*,[[:blank:]]*(.*)[[:blank:]]*,[[:blank:]]*(.*)/
+
         def initialize(tag_name, markup, options)
             super
+            m, @type, @branch, @default, @incl_locations = *markup.match(SYNTAX)
         end
 
         def render(context)
@@ -56,51 +59,28 @@ module EventsSubsystem
             branches = context['site.sr.branches']
             content = []
 
-            events = lambda do |dfl, &predicate|
-                matched_any = false
-                content << '<ul>'
-                context['site']['events'].each do |event|
-                    m, cats, year, month, day, slug = *event.cleaned_relative_path.match(MATCHER)
-                    cats = cats.split('/').drop(1)
-                    # filter by year
-                    next unless cats.include? "sr#{sr_year}"
-                    # filter by passed condition
-                    next unless predicate.call(cats, event.data['branch'])
-                    pretty_date = EventsSubsystem::format_date(year, month, day)
-                    formatted_event = "<li><a href=\"#{event.url}\">#{pretty_date}</a></li>"
-                    content << formatted_event
-                    matched_any = true
-                end
-                content << "<li>#{dfl}</li>" unless matched_any
-                content << '</ul>'
+            branch = if @branch == 'all' then 'all' else context[@branch] end
+
+            content << '<ul>'
+            matched_any = false
+            context['site.events'].each do |event|
+                m, cats, year, month, day, slug = *event.cleaned_relative_path.match(MATCHER)
+                cats = cats.split('/').drop(1)
+                # filter by year
+                next unless cats.include? "sr#{sr_year}"
+                # filter by branch
+                next unless event.data['branch'] == branch || branch == 'all'
+                # filter by type
+                next unless cats.include? @type
+                pretty_date = EventsSubsystem::format_date(year, month, day)
+                formatted_event = "<li><a href=\"#{event.url}\">#{pretty_date}</a></li>"
+                content << formatted_event
+                matched_any = true
             end
 
-            # Open the div
-            content << '<div id="date_tabs">'
-            content << '<ul>'
-            branches.each do |branch|
-                content << "<li><a href=\"#date_#{branch}\">#{branch}</a></li>"
-            end
-            content << '</ul>'
-            branches.each do |branch|
-                content << "<div id=\"date_#{branch}\">"
-                content << '<a href="/events/kickstart">Kickstart:</a>'
-                events.call("Not hosted here") { |cats, event_branch|
-                    event_branch == branch && cats.include?('kickstart')
-                }
-                content << '<a href="/events/tech_days">Tech Days:</a>'
-                events.call("TBA") { |cats, event_branch|
-                    event_branch == branch && cats.include?('tech_day')
-                }
-                content << "</div>"
-            end
-            content << '</div>'
-            content << '<div>'
-            content << '<a href="/events/competition">Competition:</a>'
-            events.call("April #{sr_year}") { |cats, event_branch|
-                cats.include?('competition')
-            }
-            content << '</div>'
+            content << "<li>#{@default}</li>" unless matched_any
+            content << "</ul>"
+
             content.join "\n"
         end
 
@@ -112,7 +92,7 @@ module EventsSubsystem
     end
 end
 
-Liquid::Template.register_tag('home_events',
+Liquid::Template.register_tag('events_list',
                               EventsSubsystem::HomeEvents)
 Liquid::Template.register_tag('event_date',
                               EventsSubsystem::GetDate)

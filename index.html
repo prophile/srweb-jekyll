@@ -66,7 +66,23 @@ extra_css:
     </div>
     <div class="box">
       <h3><a href="/key_dates">SR{{ site.sr.year }} Key Dates</a></h3>
-      {% home_events %}
+      <div id="date_tabs">
+        <ul>
+          {% for branch in site.sr.branches %}
+          <li><a href="#date_{{branch}}">{{branch}}</a></li>
+          {% endfor %}
+        </ul>
+        {% for branch in site.sr.branches %}
+          <div id="date_{{branch}}">
+            <a href="/events/kickstart">Kickstart:</a>
+            {% events_list kickstart, branch, Not hosted here, false %}
+            <a href="/events/tech_days">Tech Days:</a>
+            {% events_list tech_day, branch, TBA, false %}
+          </div>
+        {% endfor %}
+        <a href="/events/competition">Competition:</a>
+        {% events_list competition, branch, April, false %}
+      </div>
     </div>
     <div class="box clearboth">
       <h3><a href="/ide">The IDE</a></h3>
