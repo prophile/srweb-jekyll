@@ -3,6 +3,14 @@ srweb
 
 srweb is the website of [Student Robotics][srobo]. It is written in [Jekyll][jekyll], and uses [Markdown][markdown] syntax.
 
+Setting up
+----------
+
+To set up srweb:
+
+1. Clone the repo, you silly bastard.
+2. Run `bundler` to install the dependencies, including Jekyll itself.
+
 Making Changes
 --------------
 
