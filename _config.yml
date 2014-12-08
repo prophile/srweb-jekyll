@@ -25,3 +25,4 @@ sr:
 gems:
   - jekyll-redirect-from
   - jekyll-sitemap
+  - jekyll-lunr-js-search
