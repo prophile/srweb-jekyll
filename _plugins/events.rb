@@ -77,7 +77,7 @@ module EventsSubsystem
                 pretty_date = EventsSubsystem::format_date(year, month, day)
                 if @incl_locations.rstrip == "true" then
                     loc = event.data['geo']
-                    search_data = Geocoder.search(loc)[0].data
+                    search_data = GeoLookup::lookup(loc)
                     name = nil
                     search_data['address_components'].each do |component|
                         name = component['short_name'] if component['types'].include?('establishment')

@@ -1,5 +1,3 @@
-require 'geocoder'
-
 module GeoSubsystem
     SYNTAX = /([[:graph:]]*)[[:blank:]]*,[[:blank:]]*([[:graph:]]*)/
 
@@ -10,7 +8,7 @@ module GeoSubsystem
         end
 
         def render(context)
-            raw_data = Geocoder.search(context[@query])[0].data
+            raw_data = GeoLookup::lookup(context[@query])
             case @component
             when "address"
               raw_data['formatted_address']
