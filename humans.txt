@@ -1,0 +1,11 @@
+---
+---
+/* TEAM */{% for entry in site.data.authors %}
+        Developer: {{ entry.name }}
+        Contact: {{ entry.email | replace:'@',' [at] ' }}
+{% endfor %}
+
+/* SITE */
+        Last update:{{ site.time | date: "%Y/%m/%d" }}
+        Language: English
+        Doctype: HTML5
