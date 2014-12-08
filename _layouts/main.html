@@ -11,6 +11,27 @@
     {% endfor %}
     <link rel="shortcut icon" href="/images/template/favicon.ico">
     <link rel="alternate" type="application/rss+xml" title="SR RSS" href="/feed.xml">
+    <script src="/js/search.min.js"></script>
+    <script src="/js/lunr.min.js"></script>
+    <script>
+      $(function() {
+          $('#search-query').lunrSearch({
+            'indexUrl': '/js/index.json',
+            'results': '#search-results',
+            'entries': '.entries',
+            'template': '#search-results-template'
+          });
+        });
+    </script>
+    {% raw %}
+    <script id="search-results-template" type="text/mustache">
+      {{#entries}}
+      <li>
+        <a href="{{url}}">{{title}}</a>
+      </li>
+      {{/entries}}
+    </script>
+    {% endraw %}
   </head>
   <body>
     <div id="pageWrapper">
@@ -18,6 +39,12 @@
         <a href="/">
           <img src="/images/template/website_logo.png" alt="Student Robotics Logo">
         </a>
+        <form>
+          <fieldset>
+            <input id="search-query" type="text"
+                   name="q" placeholder="Search" autocomplete="off">
+          </fieldset>
+        </form>
         <div class="ie6-prop-clear"></div>
         <div class="ie6-wrapper">
         <ul>
@@ -46,6 +73,11 @@
         </div>
       </div>
       <div class="content">
+        <section id="search-results" style="display: none;">
+          <p>Search results</p>
+          <ul class="entries">
+          </ul>
+        </section>
         {{ content }}
       </div>
       <div id="footer">
