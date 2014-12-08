@@ -164,8 +164,8 @@ div#header form fieldset input[type=text]{
 	height:22px;
 	position:relative;
 	top:-1px;
-	padding: 0;
 	margin: 0;
+	width: 260px;
 }
 
 div#header form fieldset input[type=image]{
@@ -175,6 +175,19 @@ div#header form fieldset input[type=image]{
 	padding: 3px;
 	margin: 0;
 	top: 6px;
+}
+
+div#search-results {
+	position:relative;
+	width: 260px;
+}
+
+div#search-results a {
+	font-weight: bold;
+	color: #0d1f61;
+	font-size: small;
+	float: none;
+	margin: 0;
 }
 
 div.ie6-prop-clear {
