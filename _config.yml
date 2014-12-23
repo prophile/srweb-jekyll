@@ -6,6 +6,7 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - vendor
+  - circle.yml
 permalink: pretty
 markdown: kramdown
 
