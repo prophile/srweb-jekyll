@@ -7,7 +7,7 @@ dependencies:
 test:
   override:
     - bundle exec jekyll build
-    - utils/create_rpm.sh
+    - utils/create_distributions.sh
   post:
     - cp _dist/* $CIRCLE_ARTIFACTS/
 
