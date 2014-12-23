@@ -24,6 +24,7 @@ package -t rpm \
         --rpm-user wwwcontent \
         --rpm-group apache \
         --package "_dist/srweb-$VERSION.rpm" \
+        --directories /var/www/html \
         .=/var/www/html
 package -t tar \
         --package "_dist/srweb-$VERSION.tar.gz" \
