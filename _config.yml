@@ -5,6 +5,7 @@ exclude:
   - LICENSE
   - Gemfile
   - Gemfile.lock
+  - vendor
 permalink: pretty
 markdown: kramdown
 
