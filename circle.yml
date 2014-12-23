@@ -1,0 +1,7 @@
+test:
+  override:
+    - jekyll build
+    - utils/create_rpm.sh
+  post:
+    - cp _dist/* $CIRCLE_ARTIFACTS/
+
