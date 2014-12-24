@@ -15,6 +15,16 @@ collections:
     output: true
     permalink: /events/:name/
 
+keep_files:
+  - docs/python          # Python documentation mirror
+  - screens              # SRcomp screens
+  - shepherding          # SRcomp shepherding app
+  - ide                  # Here be dragons
+  - mediaconsent         # MCF generation system
+  - piwik                # User tracking
+  - tickets              # Tickets access system
+  - community-guidelines # SR community guidelines
+
 sr:
   year: 2015 # which year of SR are we? (the year of the next competition)
   openings: false # are there open slots for accepting teams for this year?
