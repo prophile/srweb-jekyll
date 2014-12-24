@@ -24,6 +24,8 @@ package -t rpm \
         --rpm-user wwwcontent \
         --rpm-group apache \
         --package "_dist/srweb-$VERSION.rpm" \
+        -d shadow-utils \
+        --before-install utils/create_user_fedora.sh \
         --directories /var/www/html \
         .=/var/www/html
 package -t tar \
