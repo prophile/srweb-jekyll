@@ -24,6 +24,8 @@ sr:
     - Munich
     - London
 
+tracking: false
+
 gems:
   - jekyll-redirect-from
   - jekyll-sitemap
