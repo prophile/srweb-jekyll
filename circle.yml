@@ -7,7 +7,7 @@ dependencies:
 test:
   override:
     - bundle exec jekyll doctor
-    - bundle exec jekyll build
+    - bundle exec jekyll build --config _config.yml,_live.yml
     - utils/create_distributions.sh
   post:
     - cp _dist/* $CIRCLE_ARTIFACTS/
