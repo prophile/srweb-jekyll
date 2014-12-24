@@ -3,7 +3,7 @@ srweb
 
 srweb is the website of [Student Robotics][srobo]. It is written in [Jekyll][jekyll], and uses [Markdown][markdown] syntax.
 
-![Build status][build-badge]
+[![Build status][build-badge]][build-page]
 
 Setting up
 ----------
@@ -29,4 +29,4 @@ To make changes:
 [markdown]: http://daringfireball.net/projects/markdown/syntax
 [gerrit-patch]: https://www.studentrobotics.org/trac/wiki/Gerrit
 [build-badge]: https://circleci.com/gh/prophile/srweb-jekyll.png
-
+[build-page]: https://circleci.com/gh/prophile/srweb-jekyll
