@@ -6,6 +6,7 @@ dependencies:
     - sudo apt-get install rpm
 test:
   override:
+    - bundle exec jekyll doctor
     - bundle exec jekyll build
     - utils/create_distributions.sh
   post:
