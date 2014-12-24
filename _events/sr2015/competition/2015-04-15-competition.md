@@ -2,16 +2,9 @@
 title: "Competition 2015"
 description: The Competition, SR2015
 layout: event
-geo: Newbury Racecourse
+location: The Grandstand, The Racecourse Newbury
+geo: The Racecourse Newbury
 ---
-
-What: [Competition](/events/competition).
-
-When: {% event_date %}
-
-Where: The Grandstand, The Racecourse Newbury.
-
-Who: Student Robotics teams.
 
 Food: There is food available at the venue.
 

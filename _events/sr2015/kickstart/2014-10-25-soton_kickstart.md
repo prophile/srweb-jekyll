@@ -3,17 +3,9 @@ title: "Kickstart 2015"
 description: Southampton Kickstart, SR2015
 layout: event
 branch: Southampton
+location: Building 32, University of Southampton
 geo: University of Southampton
 ---
-
-What: [Kickstart](/events/kickstart).
-
-When: {% event_date %}
-
-Where: [Building 32](http://data.southampton.ac.uk/building/32.html) on the University of Southampton's Highfield Campus.
-  (Also see [this campus map](http://www.southampton.ac.uk/visitus/campuses/maps/highfield_3d_key.pdf).)
-
-Who: Student Robotics teams.
 
 Food: There is a small Co-op and Sainsburys store nearby along Burgess road.
 

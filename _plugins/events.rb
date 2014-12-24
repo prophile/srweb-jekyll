@@ -1,6 +1,14 @@
 require 'geocoder'
+require 'facets/string/titlecase'
 
 module EventsSubsystem
+    class GetEventType < Liquid::Tag
+        def render(context)
+            type = context['page']['relative_path'].split('/')[-2]
+            type.gsub(/_/, ' ').titlecase
+        end
+    end
+
     def self.format_date(year, month, day)
         year  = year.to_i
         month = month.to_i
@@ -21,6 +29,10 @@ module EventsSubsystem
         "#{year}#{month}#{day}"
     end
 
+    def self.format_date_iso(year, month, day)
+        '%02i-%02i-%02i' % [year, month, day]
+    end
+
     class GetDate < Liquid::Tag
         MATCHER = /^.*\/(\d+)-(\d+)-(\d+)-(.*)\..*$/
 
@@ -38,10 +50,14 @@ module EventsSubsystem
         def render(context)
             page = if @event_name then context[@event_name] else context['page'] end
             m, year, month, day, slug = *page['relative_path'].match(MATCHER)
-            if @format == 'ics' then
-                EventsSubsystem::format_date_ics(year, month, day)
+            case @format
+            when "ics"
+              EventsSubsystem::format_date_ics(year, month, day)
+            when "iso"
+              EventsSubsystem::format_date_iso(year, month, day)
+            when "human"
             else
-                EventsSubsystem::format_date(year, month, day)
+              EventsSubsystem::format_date(year, month, day)
             end
         end
     end
@@ -108,3 +124,5 @@ Liquid::Template.register_tag('events_list',
                               EventsSubsystem::HomeEvents)
 Liquid::Template.register_tag('event_date',
                               EventsSubsystem::GetDate)
+Liquid::Template.register_tag('event_type',
+                              EventsSubsystem::GetEventType)

@@ -8,6 +8,27 @@ layout: main
   </iframe>
   <p class="address">{% reverse_geocode page.geo, html_address %}</p>
 </div>
+<div itemscope itemtype="http://schema.org/EducationEvent">
 <h1>{{ page.title }}</h1>
+<p>What: <span itemprop="name">{% event_type %}</span></p>
+
+<p>When: <time itemprop="startDate" datetime="{% event_date page iso %}">{% event_date page %}</time></p>
+
+<p itemprop="location" itemscope itemtype="http://schema.org/Place">
+  Where: <span itemprop="name">{{ page.location }}</span>
+  {% reverse_geocode page.geo, address_meta %}
+  {% reverse_geocode page.geo, geo_meta %}
+</p>
+
+<meta itemprop="typicalAgeRange" content="16–18">
+
+<span itemprop="organizer" itemscope itemtype="http://schema.org/EducationalOrganization">
+  <meta itemprop="name" content="Student Robotics">
+  <meta itemprop="description" content="A robotics competition for sixth formers.">
+  <meta itemprop="foundingDate" content="2007">
+  <meta itemprop="logo" content="https://www.studentrobotics.org/images/template/website_logo.png">
+  <meta itemprop="email" content="info@studentrobotics.org">
+</span>
 {{ content }}
+</div>
 
