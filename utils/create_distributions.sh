@@ -3,7 +3,7 @@ set -e
 FPM="bundle exec fpm"
 mkdir -p _dist
 MAINTAINER=$(git show HEAD --pretty='%aN <%aE>' -s)
-VERSION=$(git describe --always)
+VERSION=$(git describe)
 function package {
     $FPM -s dir \
          -n srweb \
