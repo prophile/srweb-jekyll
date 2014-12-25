@@ -5,7 +5,7 @@ dependencies:
   pre:
     - sudo apt-get install rpm
   post:
-    - git fetch --tags
+    - git fetch --unshallow --tags
 test:
   override:
     - bundle exec jekyll doctor
