@@ -10,7 +10,7 @@ Setting up
 
 To set up srweb:
 
-1. Clone the repo, you silly bastard.
+1. Clone the repo.
 2. Run `bundler` to install the dependencies, including Jekyll itself.
 
 Making Changes
