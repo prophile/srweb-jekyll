@@ -15,6 +15,12 @@ parser.add_argument('-s', '--strip-header', help='Strip header',
                     action='store_true')
 arguments = parser.parse_args()
 
+def extract_language(line):
+    elements = line.rstrip().split('.')
+    if len(elements) > 1:
+        return elements[-1]
+    return 'python'
+
 PRE_START_REGEX = re.compile('^<pre><code class="override-lang ([a-z0-9_-]+)">(.*)')
 def transliterate_markdown(src, dst):
     in_code_block = False
@@ -24,9 +30,10 @@ def transliterate_markdown(src, dst):
         if line.startswith('~~~'):
             in_code_block = not in_code_block
             if in_code_block:
-                dest_f.write('{% highlight python %}\n')
+                language = extract_language(line)
+                dst.write('{% highlight ' + language + ' %}\n')
             else:
-                dest_f.write('{% endhighlight %}\n')
+                dst.write('{% endhighlight %}\n')
         elif line.startswith('</code></pre>'):
             dst.write('{% endhighlight %}\n')
         else:
