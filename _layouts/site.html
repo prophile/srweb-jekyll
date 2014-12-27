@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ page.title }} | Student Robotics</title>
+    <meta charset="utf-8">
+    <meta name="description" content="{{ page.description }}">
+    <meta name="google-site-verification" content="GizX0DcCqEeGihd9CyYaqM1bVXUB-lhB9rhm53UdRC8">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    {% for extra_sheet in page.extra_css %}
+      <link rel="stylesheet" type="text/css" href="/css/{{ extra_sheet }}.css">
+    {% endfor %}
+    <link rel="author" href="/humans.txt">
+    <link rel="shortcut icon" href="/images/template/favicon.ico">
+    <link rel="alternate" type="application/rss+xml" title="SR RSS" href="/feed.xml">
+    <script src="/js/search.min.js"></script>
+    <script>
+      $(function() {
+          var searchField = $('#search-query').lunrSearch({
+            'indexUrl': '/js/index.json',
+            'results': '#search-results',
+            'entries': '.search-entries',
+            'template': '#search-results-template'
+          });
+          $('#search-form').submit(function(event) {
+            $('#search-query').blur();
+            event.preventDefault();
+          });
+        });
+    </script>
+    {% raw %}
+    <script id="search-results-template" type="text/mustache">
+      {{#entries}}
+      <p>
+        <a href="{{url}}">{{title}}</a>
+      </p>
+      {{/entries}}
+    </script>
+    {% endraw %}
+    {% if site.tracking %}
+      <script type="text/javascript">
+        var pkBaseURL = (("https:" == document.location.protocol) ? "https://www.studentrobotics.org/piwik/" : "http://www.studentrobotics.org/piwik/");
+        document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+      </script><script type="text/javascript">
+        try {
+        var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 1);
+        piwikTracker.trackPageView();
+        piwikTracker.enableLinkTracking();
+        } catch( err ) {}
+      </script>
+    {% endif %}
+  </head>
+  <body>
+    {% if site.tracking %}
+    <noscript><p><img src="http://www.studentrobotics.org/piwik/piwik.php?idsite=1" style="border:0" alt="" /></p></noscript>
+    {% endif %}
+    <div id="pageWrapper">
+      <div id="header">
+        <a href="/">
+          <img src="/images/template/website_logo.png" alt="Student Robotics Logo">
+        </a>
+        <form id="search-form">
+          <fieldset>
+            <input id="search-query" type="text"
+                   name="q" placeholder="Search" autocomplete="off">
+          </fieldset>
+          <div id="search-results" style="display: none;">
+            <div class="search-entries">
+            </div>
+          </div>
+        </form>
+        <div class="ie6-prop-clear"></div>
+        <div class="ie6-wrapper">
+        <ul>
+          <li>
+            <a href="/">Home</a>
+          </li>
+          <li>
+            <a href="/ide/">IDE</a>
+          </li>
+          <li>
+            <a href="/docs/">Docs</a>
+          </li>
+          <li>
+            <a href="/forum/">Forum</a>
+          </li>
+          <li>
+            <a href="/teams/">Teams</a>
+          </li>
+          <li>
+            <a href="/about/">About</a>
+          </li>
+          <li>
+            <a href="/news/">News</a>
+          </li>
+        </ul>
+        </div>
+      </div>
+      {{ content }}
+      <div id="original">
+          Original: <a href="/cgit/srweb.git/tree/{{ page.path }}">{{ page.path }}</a>
+      </div>
+      <div id="footer">
+        <a class="rss" href="/feed.xml">
+          <img src="/images/template/feed25x25.png" alt="RSS" title="SR RSS Latest News Feed">
+        </a>
+        <a class="facebook" href="https://www.facebook.com/StudentRobotics">
+          <img src="/images/template/facebook25x25.png" alt="Facebook" title="SR Facebook page">
+        </a>
+        <a class="twitter" href="https://twitter.com/StudentRobotics">
+          <img src="/images/template/twitter25x25.png" alt="Twitter" title="SR Twitter feed">
+        </a>
+        <a class="youtube" href="https://www.youtube.com/user/StudentRobotics">
+          <img src="/images/template/youtube25x59.png" alt="YouTube" title="SR YouTube account">
+        </a>
+        <span class="copyright">© Student Robotics 2011–{{ site.time | date: '%Y' }}</span>
+      </div>
+    </div>
+  </body>
+</html>
+
