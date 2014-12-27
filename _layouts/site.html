@@ -97,7 +97,11 @@
       </div>
       {{ content }}
       <div id="original">
+        {% if page.relative_path %}
+          Original: <a href="/cgit/srweb.git/tree/{{ page.relative_path }}">{{ page.relative_path }}</a>
+        {% else %}
           Original: <a href="/cgit/srweb.git/tree/{{ page.path }}">{{ page.path }}</a>
+        {% endif %}
       </div>
       <div id="footer">
         <a class="rss" href="/feed.xml">
