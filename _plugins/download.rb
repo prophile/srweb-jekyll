@@ -11,7 +11,7 @@ module DownloadPlugin
         end
 
         def convert(content)
-            uri = URI(content.chomp)
+            uri = URI(content.strip)
             open(uri).read
         end
     end
