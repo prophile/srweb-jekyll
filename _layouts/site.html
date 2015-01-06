@@ -49,19 +49,35 @@
       </script>
     {% endif %}
   </head>
+  {% if page.itemtype %}
+  <body itemscope itemtype="{{ page.itemtype }}">
+  {% else %}
   <body>
+  {% endif %}
     {% if site.tracking %}
     <noscript><p><img src="http://www.studentrobotics.org/piwik/piwik.php?idsite=1" style="border:0" alt="" /></p></noscript>
     {% endif %}
     <div id="pageWrapper">
       <div id="header">
         <a href="/">
-          <img src="/images/template/website_logo.png" alt="Student Robotics Logo">
+          <img src="/images/template/website_logo.png"
+               {% if page.itemtype == "http://schema.org/WebSite" %}
+               itemprop="image"
+               {% endif %}
+               alt="Student Robotics Logo">
         </a>
         <form id="search-form">
           <fieldset>
             <input id="search-query" type="text"
                    name="q" placeholder="Search" autocomplete="off">
+            {% if page.itemtype == "http://schema.org/WebSite" %}
+            <span itemprop="potentialAction"
+                  itemscope
+                  itemtype="http://schema.org/SearchAction">
+              <link itemprop="target" href="/?q={query}">
+              <meta itemprop="query-input" content="required name=query">
+            </span>
+            {% endif %}
           </fieldset>
           <div id="search-results" style="display: none;">
             <div class="search-entries">
@@ -72,7 +88,11 @@
         <div class="ie6-wrapper">
         <ul>
           <li>
-            <a href="/">Home</a>
+            <a href="/"
+               {% if page.itemtype == "http://schema.org/WebSite" %}
+               itemprop="url"
+               {% endif %}
+                >Home</a>
           </li>
           <li>
             <a href="/ide/">IDE</a>

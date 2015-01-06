@@ -4,8 +4,9 @@ layout: main
 description: The root of the site
 extra_css:
   - home
+itemtype: http://schema.org/WebSite
 ---
-{% include organization_meta.html %}
+{% include organization_meta.html itemprop="about" %}
 <script src="/js/jquery-ui.min.js"></script>
 <script>
   $(function() {
@@ -14,11 +15,12 @@ extra_css:
 </script>
 <div id="topBanner">
   <img src="/images/content/srobo_website_robot.png" alt="Image of Robot">
-  <h1>Welcome to Student Robotics</h1>
-  <p>Student Robotics is an exciting annual competition that
-     challenges teams of 16-18 year-olds to build fully autonomous
-     robots. Participating teams must design, build and test their
-     robots, ready to compete against other teams.</p>
+  <h1>Welcome to <span itemprop="name">Student Robotics</span></h1>
+  <p itemprop="description">Student Robotics is an exciting annual competition
+   that challenges teams of <span itemprop="typicalAgeRange">16-18</span>
+   year-olds to build fully autonomous robots. Participating teams must
+   design, build and test their robots, ready to compete against other
+   teams.</p>
 </div>
 <div id="latestNews">
   {% assign post = site.posts.first %}
