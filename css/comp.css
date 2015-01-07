@@ -1,0 +1,27 @@
+
+tbody tr:nth-child(odd) {
+	/* TODO: make darker */
+	background-color: #E8E8E8;
+}
+tbody tr:hover {
+	background-color: #E0E0E0;
+}
+
+table.schedule td:nth-child(4n+2) {
+	/* border-right:none; */
+	border-right:10px solid transparent;
+}
+table.schedule tr:first-child th:nth-child(n+2) {
+	border-right:10px solid transparent;
+}
+table.schedule td:nth-child(2) {
+	text-align:left;
+}
+table.schedule td {
+	text-align:center;
+}
+table.schedule tbody tr.current,
+div.match.current {
+	/* TODO: make darker */
+	background-color:#FFFFB0;
+}

@@ -1,0 +1,148 @@
+div.content div#competition {
+	border-bottom:1px solid silver;
+	position:relative;
+	margin-bottom:20px;
+	margin-top:-20px;
+	overflow:hidden;
+	/* mostly to avoid the bumpy up & down as things load */
+	min-height:350px;
+}
+
+div.content div#boxWrapper div.box:first-of-type {
+	width:660px;
+}
+
+div#header {
+	float:right;
+	width:960px;
+}
+
+div#header div#navwrapper {
+	float:right;
+	margin-top:50px;
+	margin-right:30px;
+	font-size:30px;
+	font-weight:bold;
+}
+
+div#header a {
+	float:left;
+	margin-top:20px;
+	margin-left:20px;
+}
+
+div#header ul {
+	clear:both;
+	display:block;
+	margin-top:-8px;
+}
+
+div#header ul li {
+	float:left;
+	margin-left:20px;
+}
+
+div#header ul li a {
+	text-decoration:none;
+	color:#8b8884;
+	padding:8px;
+	letter-spacing:1px;
+	margin-top:0px;
+	margin-left:0px;
+	display:block;
+}
+
+div#header ul li a:hover, div#header ul li a:focus {
+	color:#DE6400;
+}
+
+table.schedule td:nth-child(2) {
+	text-align:center;
+}
+
+div#competition div.info-box {
+	float:left;
+	position:relative;
+}
+
+div#competition span.more-link {
+	position:absolute;
+	right:0;
+	margin-top:20px;
+	margin-right:100px;
+}
+div#competition span.top-links {
+	position:absolute;
+	margin-top:20px;
+}
+div#competition span#live-stream-link {
+	right:0;
+	margin-right:100px;
+	text-align:center;
+}
+div#competition span#more-link {
+	left:0;
+	margin-left:100px;
+}
+
+div#competition div.info-box span.more-link {
+	left:190px;
+	margin-top:29px;
+}
+
+div#competition div#leaderboard-container {
+	float:right;
+	margin-top:70px;
+	padding-right:40px;
+	width:300px;
+}
+div#competition div#leaderboard {
+	margin-right:50px;
+}
+
+#streams #chooser {
+	margin:0;
+	text-align:center;
+}
+#streams #stream {
+	height:310px;
+	margin:5px 0;
+	width:320px;
+}
+
+#match-info {
+	float:left;
+	text-align:center;
+	width:600px;
+}
+
+#match-info div.match {
+	padding:5px 0;
+}
+#match-info div.scored {
+	padding:0;
+}
+#match-info div.match:nth-child(3n+1) {
+	border:none;
+}
+#match-info table th {
+	padding:0 5px;
+}
+
+#match-info div.game {
+	display:inline-block;
+}
+#match-info div.game table tbody td {
+	min-width:35px;
+}
+#match-info div.game.headings {
+	/* Something causes an extra 4px of gap on the left.
+	 * I've no idea what, but it's there in both Firefox & Chrome. */
+	margin:0 5px 0 1px;
+}
+#match-info div.game.headings table tbody th {
+	border-top-width:2px;
+	border-top-style:solid;
+	border-bottom:none;
+	padding:2px 10px;
+}

@@ -9,11 +9,32 @@
     {% for extra_sheet in page.extra_css %}
       <link rel="stylesheet" type="text/css" href="/css/{{ extra_sheet }}.css">
     {% endfor %}
+    <script src="/js/search.min.js"></script>
+    {% if site.sr.competition %}
+    <script src="/js/angular.min.js"></script>
+    <script src="/js/angular-resource.min.js"></script>
+
+    {% raw %}
+    <script>
+        var SRWEB_ROOT = "/";
+        var API_ROOT = "/comp-api";
+    </script>
+    {% endraw %}
+
+    <script src="/js/competition-utils.js"></script>
+    <script src="/js/competition-filters.js"></script>
+    <script src="/js/competition-resources.js"></script>
+    <script src="/js/controllers/CompMode.js"></script>
+
+    <!-- jquery is included in search.min.js -->
+    <script src="/js/jquery-ui.min.js"></script>
+
+    <link rel="stylesheet" href="/css/comp.css">
+    {% endif %}
     <link rel="author" href="/humans.txt">
     <link rel="license" href="/LICENSE">
     <link rel="shortcut icon" href="/images/template/favicon.ico">
     <link rel="alternate" type="application/rss+xml" title="SR RSS" href="/feed.xml">
-    <script src="/js/search.min.js"></script>
     <script>
       $(function() {
           var searchField = $('#search-query').lunrSearch({
