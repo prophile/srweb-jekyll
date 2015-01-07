@@ -31,6 +31,7 @@ sr:
     - Bristol
     - Munich
     - London
+  competition: false # is there a competition live right now?
 
 tracking: false
 
