@@ -13,6 +13,9 @@ collections:
     output: true
     permalink: /events/:name/
 
+paginate: 5
+paginate_path: "news/page:num/"
+
 keep_files:
   - docs/python          # Python documentation mirror
   - screens              # SRcomp screens
