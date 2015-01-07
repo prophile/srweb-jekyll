@@ -1,0 +1,36 @@
+#interactive_troubleshooter #resetbtnattop {
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+#interactive_troubleshooter p.message {
+    font-style: italic !important;
+    margin-left: 40px !important;
+}
+
+#interactive_troubleshooter img {
+    margin-top: 10px;
+    display: block;
+    width: auto;
+    margin: 0 auto;
+}
+
+#interactive_troubleshooter .question {
+    padding: 10px;
+    margin-bottom: 2px;
+}
+
+#interactive_troubleshooter .question label {
+    padding: 4px 8px;
+    display: inline-block;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+#interactive_troubleshooter .question label > * {
+    vertical-align: middle !important;
+}
+
+#interactive_troubleshooter .question label > input[type=radio] {
+    margin-right: 10px;
+}

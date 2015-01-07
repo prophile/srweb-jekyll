@@ -1,0 +1,307 @@
+askiffixed_question:
+  answers:
+  - answer: 'Yes'
+  - answer: 'No'
+  question: Has this fixed your problem?
+questions:
+  '':
+    answers:
+    - answer: Power Board
+      nextquestion: power-board-function-checks
+    - answer: Motor Board and Motors
+      nextquestion: motor-board-function-check
+    - answer: Servo Board and Servos
+      nextquestion: servo-board-function-check
+    - answer: Ruggeduino
+      nextquestion: io-board-function-check
+    - answer: Batteries
+      nextquestion: battery-damage-check
+    - answer: Vision
+      nextquestion: vision
+    - answer: IDE
+      nextquestion: ide
+    question: Which piece of kit seems to be the issue?
+  battery-damage-check:
+    answers:
+    - answer: 'Yes'
+      message: You should immediately disconnect the battery, place it in a dry container
+        &mdash; preferably outside &mdash; and post a message on the <a href="/forums"
+        target="_blank">forums</a> to discuss how to dispose of it.
+    - answer: 'No'
+      nextquestion: is-battery-charged
+    question: Does the battery have any bulges in it? <img title="Three cell, 2200mAh,
+      lithium-ion polymer battery" alt="An image of a three cell, 2200mAh, lithium-ion
+      polymer battery, similar to those in the kits" src="/images/content/kit/battery.png"
+      />
+  both-batteries:
+    answers:
+    - answer: 'Yes'
+      message: There may be a problem with the specific battery, consider posting
+        on the <a href="/forums" target="_blank">forums</a>.
+    - answer: 'No'
+      message: There may be a problem with your Power Board or Charger, consider posting
+        on the <a href="/forums" target="_blank">forums</a>.
+    question: Try using your other battery. Does this fix the issue?
+  ide:
+    answers:
+    - answer: My code does not check correctly.
+      message: Click on the 'Error' tab to see detailed explanations of the errors.
+    - answer: My latest code is not exported to the zip file.
+      message: Make sure you've pressed save before pressing export.
+    question: Choose the option that best describes your situation.
+  io-board-dead:
+    answers:
+    - answer: 'Yes'
+      message: There is an issue with your Ruggeduino, you should post a message on
+        the <a href="/forums" target="_blank">forums</a>.
+    - answer: 'No'
+      message: There may be an issue with your power connector, consider posting on
+        the <a href="/forums" target="_blank">forums</a>.
+    question: Is there any apparent damage to your Ruggeduino (check the pins for
+      visible deformation)?
+  io-board-function-check:
+    answers:
+    - answer: My Ruggeduino isn't doing anything
+      nextquestion: io-board-led
+    - answer: My external peripherals aren't working as I expected.
+      nextquestion: io-peripherals
+    question: Choose the option that best describes your situation.<br/><img src="/images/content/kit/ruggeduino_diagram.png"
+      />
+  io-board-led:
+    answers:
+    - answer: 'Yes'
+      nextquestion: io-board-usb
+    - answer: 'No'
+      nextquestion: io-board-power
+    question: Is the Power light on your Ruggeduino on?
+  io-board-power:
+    answers:
+    - answer: 'Yes'
+      nextquestion: io-board-usb
+    - answer: 'No'
+      askiffixed: true
+      message: Connect the Ruggeduino to the Power Board as described <a href="/docs/kit/ruggeduino"
+        target="_blank">in the Docs</a>.
+      nextquestion: io-board-dead
+    question: Is the Ruggeduino connected to the USB hub?
+  io-board-usb:
+    answers:
+    - answer: 'Yes'
+      nextquestion: io-peripherals
+    - answer: 'No'
+      askiffixed: true
+      message: You should connect up your Ruggeduino to the Power Board as described.
+      nextquestion: io-peripherals
+    question: Is the Ruggeduino connected to the Power Board via an appropriately
+      connected USB Hub?
+  io-peripherals:
+    answers:
+    - answer: My peripherals are fine
+      message: You may well have mixed up an IO pin index in your code, remember they
+        are <a href="//en.wikipedia.org/wiki/Zero-based_numbering">zero-indexed</a>
+        &mdash; double check your pin indexing.<br />Make sure you are using the right
+        pins for your type of output (digital or analouge) as per <a href="/docs/programming/sr/ruggeduinos/"
+        target="_blank">the docs</a>.<br /><br />If you continue to have difficulties
+        then consider posting on the <a href="/forums" target="_blank">forums</a>.
+    - answer: I need help with my peripherals
+      message: Consider asking about this hardware on the <a href="/forums" target="_blank">forums</a>,
+        and check the manual or contact the manufacturer of your peripheral.
+    question: There could be an issue with one of your external peripherals, please
+      verify they are connected properly, and consider testing them independently.
+  is-battery-charged:
+    answers:
+    - answer: 'Yes'
+      nextquestion: both-batteries
+    - answer: 'No'
+      askiffixed: true
+      message: It is important that you keep your batteries charged so that they don't
+        run down too low. Consult the <a href="/docs/kit/batteries/" target="_blank">documentation</a>
+        and make sure to follow the instructions appropriate for the charger you have
+        been supplied with.
+      nextquestion: both-batteries
+    question: Are your batteries definitely charged up?<br />Try plugging them into
+      your charger and waiting for 'battery full' sound.
+  motor-board-function-check:
+    answers:
+    - answer: Nothing is happening
+      nextquestion: motor-board-led
+    - answer: My motors are not behaving the same as each other.
+      nextquestion: motor-force
+    - answer: My motors are not doing what I expected
+      nextquestion: motor-more-than-one
+    question: Choose the option that best describes your situation.<br /><img src="/images/content/kit/motor_and_camcon.png"
+      />
+  motor-board-led:
+    answers:
+    - answer: 'Yes'
+      nextquestion: motor-board-usb
+    - answer: 'No'
+      nextquestion: motor-board-power
+    question: Is the Power light on your Motor Board on?<br /><img src="/images/content/kit/mcv4b_board_diagram.png"
+      />
+  motor-board-power:
+    answers:
+    - answer: 'Yes'
+      nextquestion: motor-board-usb
+    - answer: 'No'
+      askiffixed: true
+      message: Connect the Motor to the Power Board as described <a href="/docs/kit/motor_board"
+        target="_blank">in the docs</a>.
+      nextquestion: motor-board-usb
+    question: Is the Motor Board connected to power?
+  motor-board-usb:
+    answers:
+    - answer: 'Yes'
+      nextquestion: motor-programming
+    - answer: 'No'
+      askiffixed: true
+      message: Connect the Motor up with USB cables.
+      nextquestion: motor-programming
+    question: Is the Motor Board connected with a USB to an appropriately connected
+      USB Hub?
+  motor-count:
+    answers:
+    - answer: 'Yes'
+      nextquestion: motor-more-than-one
+    - answer: 'No'
+      nextquestion: motor-programming-direction
+    question: Are you trying to control more than one motor at the same time?
+  motor-force:
+    answers:
+    - answer: The Battery is definitely charged
+      nextquestion: motor-count
+    - answer: The Battery isn't charged
+      askiffixed: true
+      message: <a href="/docs/kit/batteries/" target="_blank">Charge your
+        batteries</a> and try again. Make sure to follow the instructions appropriate
+        for the charger you have been supplied with.
+      nextquestion: motor-count
+    question: No two Motors are exactly the same, and the <a href="//en.wikipedia.org/wiki/Pulse-width_modulation">Pulse-Width
+      Modulated</a> nature of the power supply can lead to different behaviours from
+      different motors, but there are some things we can check.<br />Is your battery
+      charged? Less charge means lower voltage means less torque.<br /><img src="/images/content/kit/battery.png"
+      />
+  motor-more-than-one:
+    answers:
+    - answer: Some of the Motors aren't spinning.
+      askiffixed: true
+      message: You may well have mixed up a Motor index in your code &mdash; double
+        check your Motor indexing.
+      nextquestion: motor-programming
+    - answer: Some of the Motors spin in the wrong direction
+      askiffixed: true
+      message: 'Check the Motors are orientated correctly, and <abbr title="turn negative,
+        ie: multiply by -1">negate</abbr> the values you pass to Motors if you notice
+        it is spinning in the wrong direction.'
+      nextquestion: motor-programming
+    - answer: The Motors are all spinning at different speeds
+      askiffixed: true
+      message: Double check your code for discrepancies, however, it is worth noting
+        that no two Motors will give you exactly the same output, and you will need
+        to account for this in your code.<br />Ensuring your batteries are charged
+        will result in <strong>predictable</strong> operation, and allow you to cope
+        with the issue.
+      nextquestion: motor-programming
+    question: Select the option that best describes you situation.
+  motor-programming:
+    answers:
+    - answer: 'Yes'
+      message: There may be an issue with your code, consider posting on the <a href="/forums"
+        target="_blank">forums</a>.
+    - answer: 'No'
+      message: There may be an issue with your Motor Board, consider posting on the
+        <a href="/forums" target="_blank">forums</a>.
+    question: Please test the Motor with the <a href="/docs/kit/tablet" target="_blank">tablet</a>.
+      Does the Motor respond to the tablet?
+  motor-programming-direction:
+    answers:
+    - answer: 'Yes'
+      askiffixed: true
+      message: Try giving a negative value to the Motor, as this will cause it to
+        spin in the opposite direction.
+      nextquestion: motor-programming
+    - answer: 'No'
+      nextquestion: motor-programming
+    question: Does the Motor spin in the wrong direction?
+  power-board-function-checks:
+    answers:
+    - answer: My Power Board isn't doing anything
+      nextquestion: power-board-power-check
+    question: Choose the option that best describes your situation.
+  power-board-power-check:
+    answers:
+    - answer: 'Yes'
+      nextquestion: battery-damage-check
+    - answer: 'No'
+      askiffixed: true
+      message: Check the &lsquo;Charging Batteries&rsquo; section of the <a href="/docs/kit/batteries/"
+        target="_blank">battery</a> documentation and try again. Make sure to follow
+        the instructions appropriate for the charger you have been supplied with.
+      nextquestion: battery-damage-check
+    question: Is the battery plugged in and charged?
+  servo-board-function-check:
+    answers:
+    - answer: Nothing is happening
+      nextquestion: servo-board-led
+    - answer: The Servos aren't doing what I expected
+      askiffixed: true
+      message: Check that the servo is orientated correctly as described in <a href="/docs/kit/servo_board"
+        target="_blank">the docs</a>, and check whether it is a continuous Servo.
+      nextquestion: servo-programming
+    question: Choose the option that best describes your situation.
+  servo-board-led:
+    answers:
+    - answer: 'Yes'
+      nextquestion: servo-board-usb
+    - answer: 'No'
+      nextquestion: servo-board-power
+    question: Is the Power light on your Servo Board on?
+  servo-board-power:
+    answers:
+    - answer: 'Yes'
+      nextquestion: servo-board-usb
+    - answer: 'No'
+      askiffixed: true
+      message: Connect the Servo to power as described <a href="/docs/kit/servo_board"
+        target="_blank">in the Docs</a>.
+      nextquestion: servo-board-usb
+    question: Is the Servo Board connected to power?
+  servo-board-usb:
+    answers:
+    - answer: 'Yes'
+      nextquestion: servo-programming
+    - answer: 'No'
+      askiffixed: true
+      message: You should connect up your Servo Board to the Power Board as described.
+      nextquestion: servo-programming
+    question: Is the Servo Board connected to the Power Board via an appropriately
+      connected USB Hub?
+  servo-programming:
+    answers:
+    - answer: 'Yes'
+      message: There may be an issue with your code, consider posting on the <a href="/forums"
+        target="_blank">forums</a>.
+    - answer: 'No'
+      message: There may be an issue with your servo or Servo Board. Try using a different
+        servo if you can, otherwise consider posting on the <a href="/forums" target="_blank">forums</a>.
+    question: Please test the Servo with the <a href="/docs/kit/tablet" target="_blank">tablet</a>.
+      Does the Servo respond to the tablet?
+  vision:
+    answers:
+    - answer: Markers don't get picked up.
+      nextquestion: vision-markers-dont-get-picked-up
+    - answer: The camera takes a long time to take a photo.
+      message: Try reducing the resolution in your code, you'll have to find an optimum
+        resolution for your robot to get the best speed and detail.
+    question: Choose the option that best describes your situation.
+  vision-markers-dont-get-picked-up:
+    answers:
+    - answer: 'Yes'
+      message: Make sure the marker is flat, well-lit and there a visible border around
+        the pattern, and if your robot is moving you should check the camera is not
+        shaking.<br />If you still cannot pickup any markers there could be a problem
+        with your code, consider posting on the <a href="/forums" target="_blank">forums</a>.
+    - answer: 'No'
+      message: There may be an issue with your Webcam, consider posting on the <a
+        href="/forums" target="_blank">forums</a>.
+    question: Does the Webcam work if you plug it into a computer?
