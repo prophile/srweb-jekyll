@@ -161,11 +161,12 @@ div#header form fieldset input {
 
 div#header form fieldset input[type=text]{
 	font-size:16px;
-	height:22px;
+	height:28px;
 	position:relative;
 	top:-1px;
 	margin: 0;
-	width: 260px;
+	width: 266px;
+	box-sizing: border-box;
 }
 
 div#header form fieldset input[type=image]{
@@ -175,11 +176,6 @@ div#header form fieldset input[type=image]{
 	padding: 3px;
 	margin: 0;
 	top: 6px;
-}
-
-div#search-results {
-	position:relative;
-	width: 260px;
 }
 
 div#search-results a {
@@ -475,3 +471,17 @@ div.event-box {
 	padding: 1em;
 	margin-left: 2em;
 }
+
+/* SEARCH */
+
+div#search-results {
+	background-color: rgba(255, 255, 255, 0.9);
+	padding: 1em;
+	border: 1px solid rgba(30, 30, 30, 0.4);
+	border-radius: 0 0 5px 5px;
+	position: absolute;
+	width: 266px;
+	box-sizing: border-box;
+	z-index: 1000000;
+}
+
