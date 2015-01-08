@@ -1,6 +1,6 @@
 ---
 title: Interactive Troubleshooter
-layout: main
+layout: docs
 extra_css:
   - interactive_troubleshooter
 ---
