@@ -1,6 +1,8 @@
 ---
 layout: main
 title: Tech Days
+redirect_from:
+  - /schools/tech_days
 ---
 Tech Days
 =========

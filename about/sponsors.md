@@ -2,6 +2,8 @@
 description: 'Sponsors: the people that make Student Robotics possible.'
 layout: main
 title: Sponsors
+redirect_from:
+  - /sponsors
 ---
 Sponsors
 ========

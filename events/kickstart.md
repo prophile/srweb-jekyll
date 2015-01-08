@@ -1,6 +1,8 @@
 ---
 layout: main
 title: Kickstart
+redirect_from:
+  - /schools/kickstart
 ---
 Kickstart
 =========

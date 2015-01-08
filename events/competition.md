@@ -1,6 +1,8 @@
 ---
 layout: main
 title: Competition
+redirect_from:
+  - schools/competition
 ---
 Competition
 ===========

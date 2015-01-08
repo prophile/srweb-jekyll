@@ -2,6 +2,8 @@
 description: There are so many ways to get involved in Student Robotics; whether you're
   a student, a school or college, or a business, you can get involved.
 layout: main
+redirect_from:
+  - /about/gettinginvolved
 title: How to Help
 ---
 How to Help

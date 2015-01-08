@@ -2,6 +2,8 @@
 description: The Student Robotics Team
 layout: main
 title: The Committee
+redirect_from:
+  - /about/team
 ---
 The Student Robotics Committee
 ==============================
