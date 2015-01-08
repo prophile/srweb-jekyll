@@ -1,0 +1,5 @@
+---
+permalink: /.htaccess
+---
+
+{% htaccess_redirects %}
