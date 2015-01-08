@@ -107,3 +107,4 @@ DEPENDENCIES
   jekyll-lunr-js-search
   jekyll-redirect-from
   jekyll-sitemap
+  nokogiri
