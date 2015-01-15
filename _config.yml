@@ -36,6 +36,8 @@ sr:
     - London
   competition: false # is there a competition live right now?
 
+comp_api: http://localhost:3333/
+
 tracking: false
 
 gems:
