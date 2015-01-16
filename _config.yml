@@ -3,6 +3,7 @@ exclude:
   - utils
   - Gemfile
   - Gemfile.lock
+  - .bundle
   - vendor
   - circle.yml
 permalink: pretty
