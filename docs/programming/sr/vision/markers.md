@@ -1,0 +1,40 @@
+---
+description: Information about the markers used in the 2012 competition
+layout: docs
+title: Markers
+---
+<img src="/images/content/marker-0.png" alt="An Example Marker: Arena marker 0" class="right" />
+An example *libkoki* marker is given to the right; this one is *arena-0*.
+There is a dot in the top-left corner of the black border.  This corner is known as the *principal corner*, and its location is important if measuring the marker's orientation about the Z-axis.
+There is also some text in the bottom-left corner of the black border.
+This text will say something like `"libkoki marker #0 (v0.5) 'ARENA'"`.
+Let's break that down:
+`#0` means marker number 0;
+`(v0.5)` tells you the version of the marker, it is important the latest version is used; and
+`'ARENA'` is just a human-readable description of what the marker is for.
+
+The table below lists the *libkoki* markers that your robot will know about and what their meaning is:
+
+
+| Use         | Range | Size          |
+|-------------|-------|---------------|
+| Arena       | 00-27 | 250mm x 250mm |
+| Robots      | 28-31 | 100mm x 100mm |
+| Flags       | 32-61 | 250mm x 250mm |
+
+
+You can download all of these markers, as PDFs, in a single [ZIP file](/resources/2015/markers/sr-dev-markers-2015.zip).
+Alternatively, you may download individual markers [here](/resources/2015/markers/).
+The *Arena* and *Flag* markers, due to their size, need to be printed on A3 paper.
+*Robot* markers can be printed on A4 paper.
+Please make sure your system is not scaling the PDFs when printing them.
+You can easily check this by measuring the width of the grey border around the markers and comparing it with the table above.
+Any differences will make the distance estimations inaccurate.
+
+Note that a different set of markers will be used for the competition (by adding 100 to all of the markers above).
+This is not something you need to worry about, though.
+We will handle this for you when your robot is started in a competition mode.
+
+The white space around the markers is very important -- without it, the markers probably won't be recognised.
+If the markers become damaged (scuff markers, tears, etc...) they will not function as well (if at all).
+If this happens, it is best to just print another one.
