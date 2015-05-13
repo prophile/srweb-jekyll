@@ -28,15 +28,7 @@ Events
 
 The events system is a thin layer on top of Jekyll collections.
 
-Each event has some YAML frontmatter which is used to generate the events page.
-
-- `title` is the title of the event.
-- `description` is included in the HTML meta data.
-- `layout` should be set to `event`.
-- `branch` is the human-readable name of the branch, i.e. Southampton, Bristol, London, etc.
-- `location` is a location that can be reverse geocoded.
-- `dates` is a list of days where each day is a list of three elements being the date, the start time and the end time.
-- `override` can be used to override some of the event details, such as `where`.
+Each event has some YAML frontmatter which is used to generate the events page (see `FRONTMATTER.md`).
 
 The events page will automatically insert the `what`, `when` and `where` fields, any other fields should be in the body of the event. Stylistically, the field names should be bold.
 
