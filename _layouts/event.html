@@ -3,7 +3,7 @@ layout: main
 ---
 {% unless page.hidemap %}
 <div class="event-box">
-  <iframe width="400" height="400" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCP7rr-Ch7FW_x7aYNKnsNBXvfb9wHIQdc&q={% reverse_geocode page.location, geo %}&zoom=13"></iframe>
+  <iframe width="400" height="400" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCP7rr-Ch7FW_x7aYNKnsNBXvfb9wHIQdc&q={{ page.location }}&zoom=15"></iframe>
   <p class="address">{% reverse_geocode page.location, html_address %}</p>
 </div>
 {% endunless %}
