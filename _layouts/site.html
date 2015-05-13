@@ -11,6 +11,18 @@
       <link rel="stylesheet" type="text/css" href="/css/{{ extra_sheet }}.css">
     {% endfor %}
     <script src="/js/search.min.js"></script>
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@StudentRobotics" />
+    <meta name="twitter:title" content="{{ page.title }}" />
+    <meta name="twitter:description" content="{{ page.description }}" />
+    <meta name="twitter:url" content="{{ site.url }}{{ page.url }}" />
+
+    <meta property="og:title" content="{{ page.title }}" />
+    <meta property="og:description" content="{{ page.description }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ site.url }}{{ page.url }}" />
+
     {% if site.sr.competition %}
     <script src="/js/angular.min.js"></script>
     <script src="/js/angular-resource.min.js"></script>
