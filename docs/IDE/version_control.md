@@ -3,7 +3,6 @@ description: An explanation of how to best use the versioning that the IDE does.
 layout: docs
 title: Version Control in the IDE
 ---
-===============
 
 Each project within the IDE is stored within a [git][wikipedia-git] repository.
 This means that whenever you save a change to a file,
