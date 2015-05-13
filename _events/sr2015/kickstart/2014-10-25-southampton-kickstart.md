@@ -4,13 +4,12 @@ description: >
     The Southampton Kickstart on the 25th of October 2014.
 layout: event
 branch: Southampton
-location: University of Southampton
+location: Building 32, University of Southampton
+override:
+    where: <a href="http://data.southampton.ac.uk/building/32.html">Building 32</a>, University of Southampton Highfield Campus
 ---
 
 When: 25<sup>th</sup> October 2014.
-
-Where: [Building 32](http://data.southampton.ac.uk/building/32.html) on the University of Southampton's Highfield Campus.
-  (Also see [this campus map](http://www.southampton.ac.uk/visitus/campuses/maps/highfield_3d_key.pdf).)
 
 Who: Student Robotics teams.
 

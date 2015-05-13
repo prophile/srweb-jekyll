@@ -5,12 +5,13 @@ description: >
 layout: event
 branch: Oxford
 location: Rutherford Appleton Laboratory, Harwell, Oxford
+override:
+    where: >
+        Building R27, Rutherford Appleton Laboratories, Harwell, Oxford, OX11 0QX<br />
+        Please report to reception on arrival.
 ---
 
 When: 10am–5pm, 21<sup>st</sup> February 2015
-
-Where: Building R27, [Rutherford Appleton Laboratories, Harwell, Oxford, OX11 0QX](https://www.google.co.uk/maps/search/RAL,+Harwell,+OX11+0QX)<br />
-       Please report to reception on arrival.
 
 Who: All Student Robotics teams are welcome to attend.
      Please [inform](/about/contactus) us if your team is coming.

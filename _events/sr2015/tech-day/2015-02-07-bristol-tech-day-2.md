@@ -9,10 +9,6 @@ location: Merchant Venturers Building, University of Bristol
 
 When: 11:00AM - 5PM. 7<sup>th</sup> February 2015
 
-Where: [Merchant Venturers building](http://www.bristol.ac.uk/conferences-hospitality/conferences/precinct/merchant/),
-   Woodland Road, on the University of Bristol's Campus.
-  (Also see [this campus map](http://www.bris.ac.uk/media-library/sites/maps/migrated/documents/precinct-key.pdf).)
-
 Who: All Student Robotics teams are welcome to attend.
   Please [inform](/about/contactus) us if your team is coming.
 

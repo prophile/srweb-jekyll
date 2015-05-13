@@ -14,7 +14,13 @@ layout: main
   <p><strong>What:</strong> <a itemprop="name" href="/events/{% event_type raw %}">{% event_type human %}</a></p>
 
   <meta itemprop="startDate" content="{% event_date page iso %}" />
-  <meta itemprop="location" content="{{ page.location }}" />
+
+  <p itemprop="location" itemscope itemtype="http://schema.org/Place">
+    <strong>Where:</strong> <span itemprop="name">{% if page.override.where %}{{ page.override.where }}{% else %}{% reverse_geocode page.location, address %} (see map for details){% endif %}</span>
+    {% reverse_geocode page.location, address_meta %}
+    {% reverse_geocode page.location, geo_meta %}
+  </p>
+
   <meta itemprop="typicalAgeRange" content="16–18" />
 
   {% include organization_meta.html itemprop="organizer" %}

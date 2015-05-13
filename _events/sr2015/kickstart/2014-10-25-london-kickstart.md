@@ -9,8 +9,6 @@ location: Facebook London, 10 Brock St
 
 When: 25<sup>th</sup> October 2014.
 
-Where: [Facebook HQ, 10 Brock St, London NW1 3FG](https://goo.gl/maps/4prRE)
-
 Who: Student Robotics teams.
 
 Food: Nearby shops/cafes.

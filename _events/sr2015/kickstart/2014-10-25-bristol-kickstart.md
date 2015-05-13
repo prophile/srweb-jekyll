@@ -4,14 +4,10 @@ description: >
     The Bristol Kickstart on the 25th of October 2014.
 layout: event
 branch: Bristol
-location: University of Bristol
+location: Merchant Venturers Building, University of Bristol
 ---
 
 When: 25<sup>th</sup> October 2014.
-
-Where: [Merchant Venturers building](http://www.bristol.ac.uk/conferences-hospitality/conferences/precinct/merchant/),
-   Woodland Road, on the University of Bristol's Campus.
-  (Also see [this campus map](http://www.bris.ac.uk/media-library/sites/maps/migrated/documents/precinct-key.pdf).)
 
 Who: Student Robotics teams.
 
