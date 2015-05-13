@@ -7,8 +7,6 @@ branch: Oxford
 location: Rutherford Appleton Laboratory, Harwell, Oxford
 ---
 
-What: A [tech day](/events/tech_days).
-
 When: 10am–5pm, 21<sup>st</sup> February 2015
 
 Where: Building R27, [Rutherford Appleton Laboratories, Harwell, Oxford, OX11 0QX](https://www.google.co.uk/maps/search/RAL,+Harwell,+OX11+0QX)<br />

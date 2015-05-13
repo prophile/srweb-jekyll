@@ -7,8 +7,6 @@ branch: Southampton
 location: University of Southampton
 ---
 
-What: A [tech day](/events/tech_days).
-
 When: 10am–5pm, 6<sup>th</sup> December 2014
 
 Where: [Building 25](http://data.southampton.ac.uk/building/25.html) on the University of Southampton's Highfield Campus.

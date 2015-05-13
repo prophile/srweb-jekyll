@@ -7,8 +7,6 @@ branch: Bristol
 location: Merchant Venturers Building, University of Bristol
 ---
 
-What: A [tech day](/events/tech_days).
-
 When: 11:00AM - 5PM. 7<sup>th</sup> February 2015
 
 Where: [Merchant Venturers building](http://www.bristol.ac.uk/conferences-hospitality/conferences/precinct/merchant/),

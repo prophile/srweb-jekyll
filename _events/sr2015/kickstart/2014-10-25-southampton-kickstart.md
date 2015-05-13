@@ -7,8 +7,6 @@ branch: Southampton
 location: University of Southampton
 ---
 
-What: [Kickstart](/events/kickstart).
-
 When: 25<sup>th</sup> October 2014.
 
 Where: [Building 32](http://data.southampton.ac.uk/building/32.html) on the University of Southampton's Highfield Campus.

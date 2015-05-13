@@ -11,7 +11,8 @@ layout: main
 <div itemscope itemtype="http://schema.org/EducationEvent">
   <h1>{{ page.title }}</h1>
 
-  <meta itemprop="name" content="{% event_type page %}" />
+  <p><strong>What:</strong> <a itemprop="name" href="/events/{% event_type raw %}">{% event_type human %}</a></p>
+
   <meta itemprop="startDate" content="{% event_date page iso %}" />
   <meta itemprop="location" content="{{ page.location }}" />
   <meta itemprop="typicalAgeRange" content="16–18" />

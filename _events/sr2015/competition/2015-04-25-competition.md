@@ -7,8 +7,6 @@ location: The Racecourse Newbury
 hidemap: true
 ---
 
-What: The [competition](/events/competition), where the robots will play *[Capture the Flag](/schools/game)*.
-
 When: 25<sup>th</sup> and 26<sup>th</sup> April 2015.
 
 Where: [Newbury Racecourse](http://www.newburyracecourse.co.uk/conferences-and-events/how-to-find-us/) Grandstand.
@@ -18,6 +16,8 @@ Who: All Student Robotics [teams](/teams/).  (Note, both days of the competition
 Entrance: Competitors need to bring along a [ticket](/schools/team-leaders/#Tickets) to be allowed entry. Adults must sign a media consent form &ndash; these will be available on the day for visitors; team leaders are encouraged to generate and submit a pre-filled form using the same system as competitors. Anyone under the age of 18 must be accompanied by an adult. Student Robotics will announce when tickets are available.
 
 Food: Food will be available for purchase from the catering stands in the grandstand.
+
+Game: [Capture the Flag](/schools/game).
 
 ## [The Site](#TheSite) {#TheSite}
 

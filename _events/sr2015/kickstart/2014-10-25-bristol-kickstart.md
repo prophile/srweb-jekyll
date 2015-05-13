@@ -7,8 +7,6 @@ branch: Bristol
 location: University of Bristol
 ---
 
-What: [Kickstart](/events/kickstart).
-
 When: 25<sup>th</sup> October 2014.
 
 Where: [Merchant Venturers building](http://www.bristol.ac.uk/conferences-hospitality/conferences/precinct/merchant/),

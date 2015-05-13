@@ -3,9 +3,21 @@ require 'facets/string/titlecase'
 
 module EventsSubsystem
     class GetEventType < Liquid::Tag
+        def initialize(tag_name, text, options)
+            super
+
+            @format = text.strip
+        end
+
         def render(context)
             type = context['page']['relative_path'].split('/')[-2]
-            type.gsub(/-/, ' ').titlecase
+
+            case @format
+            when 'human'
+                type.gsub(/-/, ' ').titlecase
+            when 'raw'
+                type
+            end
         end
     end
 
