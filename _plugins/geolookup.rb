@@ -13,7 +13,10 @@ module GeoLookup
 
         puts "Querying for geo information on #{query.inspect}"
 
-        Geocoder::configure(:timeout => 15, :lookup => :google)
+        Geocoder::configure(
+            :timeout => 15,
+            :lookup => :google
+        )
         response = Geocoder::search(query)
 
         if response.empty?
