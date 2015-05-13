@@ -21,4 +21,3 @@ module GeoLookup
         results
     end
 end
-

@@ -20,9 +20,8 @@ redirect_from:
 
 {% for branch in site.sr.branches %}
 <h3>{{ branch }}</h3>
-{% events_list tech_day, branch, TBA, true %}
+{% events_list tech-day, branch, TBA, true %}
 {% endfor %}
 
 <h2>Competition</h2>
 {% events_list competition, all, Date TBC, true %}
-

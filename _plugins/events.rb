@@ -5,7 +5,7 @@ module EventsSubsystem
     class GetEventType < Liquid::Tag
         def render(context)
             type = context['page']['relative_path'].split('/')[-2]
-            type.gsub(/_/, ' ').titlecase
+            type.gsub(/-/, ' ').titlecase
         end
     end
 
@@ -92,7 +92,7 @@ module EventsSubsystem
                 next unless cats.include? @type
                 pretty_date = EventsSubsystem::format_date(year, month, day)
                 if @incl_locations.rstrip == "true" then
-                    loc = event.data['geo']
+                    loc = event.data['location']
                     search_data = GeoLookup::lookup(loc)
                     name = nil
                     search_data['address_components'].each do |component|

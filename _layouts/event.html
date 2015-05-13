@@ -2,27 +2,19 @@
 layout: main
 ---
 <div class="event-box">
-  <iframe width="400" height="400"
-          frameborder="0" style="border:0"
-          src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCP7rr-Ch7FW_x7aYNKnsNBXvfb9wHIQdc&q={% reverse_geocode page.geo, geo %}&zoom=13">
-  </iframe>
-  <p class="address">{% reverse_geocode page.geo, html_address %}</p>
+  <iframe width="400" height="400" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCP7rr-Ch7FW_x7aYNKnsNBXvfb9wHIQdc&q={% reverse_geocode page.location, geo %}&zoom=13"></iframe>
+  <p class="address">{% reverse_geocode page.location, html_address %}</p>
 </div>
+
 <div itemscope itemtype="http://schema.org/EducationEvent">
-<h1>{{ page.title }}</h1>
-<p>What: <span itemprop="name">{% event_type %}</span></p>
+  <h1>{{ page.title }}</h1>
 
-<p>When: <time itemprop="startDate" datetime="{% event_date page iso %}">{% event_date page %}</time></p>
+  <meta itemprop="name" content="{% event_type page %}" />
+  <meta itemprop="startDate" content="{% event_date page iso %}" />
+  <meta itemprop="location" content="{{ page.location }}" />
+  <meta itemprop="typicalAgeRange" content="16–18" />
 
-<p itemprop="location" itemscope itemtype="http://schema.org/Place">
-  Where: <span itemprop="name">{{ page.location }}</span>
-  {% reverse_geocode page.geo, address_meta %}
-  {% reverse_geocode page.geo, geo_meta %}
-</p>
+  {% include organization_meta.html itemprop="organizer" %}
 
-<meta itemprop="typicalAgeRange" content="16–18">
-
-{% include organization_meta.html itemprop="organizer" %}
-{{ content }}
+  {{ content }}
 </div>
-

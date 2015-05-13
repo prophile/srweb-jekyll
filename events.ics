@@ -8,8 +8,8 @@ METHOD:PUBLISH
 BEGIN:VEVENT
 UID:{{ event.url }}
 ORGANIZER;CN="Student Robotics":MAILTO:info@studentrobotics.org
-GEO:{% reverse_geocode event.geo, geo %}
-LOCATION:{% reverse_geocode event.geo, address %}
+GEO:{% reverse_geocode event.location, geo %}
+LOCATION:{% reverse_geocode event.location, address %}
 SUMMARY:{{ event.title }}
 CLASS:PUBLIC
 DTSTART;VALUE=DATE:{% event_date event ics %}
