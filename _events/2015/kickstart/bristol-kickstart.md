@@ -9,9 +9,9 @@ dates:
     - ['2014-10-25', '10:00', '17:00']
 ---
 
-Who: Student Robotics teams.
+**Who:** Student Robotics teams.
 
-Food: There are a number of cafés opposite the [Wills Memorial building](http://www.bristol.ac.uk/conferences-hospitality/conferences/precinct/willsmemorial), which is about a 2 minute walk.
+**Food:** There are a number of cafés opposite the [Wills Memorial building](http://www.bristol.ac.uk/conferences-hospitality/conferences/precinct/willsmemorial), which is about a 2 minute walk.
   Alternatively, the city centre shops are about a 4 minute walk from the Merchant Venturers building.
 
 Schedule

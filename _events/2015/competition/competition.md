@@ -10,13 +10,13 @@ dates:
     - ['2015-04-26', '9:00', '18:00']
 ---
 
-Who: All Student Robotics [teams](/teams/).  (Note, both days of the competition feature matches)
+**Who:** All Student Robotics [teams](/teams/).  (Note, both days of the competition feature matches)
 
-Entrance: Competitors need to bring along a [ticket](/schools/team-leaders/#Tickets) to be allowed entry. Adults must sign a media consent form &ndash; these will be available on the day for visitors; team leaders are encouraged to generate and submit a pre-filled form using the same system as competitors. Anyone under the age of 18 must be accompanied by an adult. Student Robotics will announce when tickets are available.
+**Entrance:** Competitors need to bring along a [ticket](/schools/team-leaders/#Tickets) to be allowed entry. Adults must sign a media consent form &ndash; these will be available on the day for visitors; team leaders are encouraged to generate and submit a pre-filled form using the same system as competitors. Anyone under the age of 18 must be accompanied by an adult. Student Robotics will announce when tickets are available.
 
-Food: Food will be available for purchase from the catering stands in the grandstand.
+**Food:** Food will be available for purchase from the catering stands in the grandstand.
 
-Game: [Capture the Flag](/schools/game).
+**Game:** [Capture the Flag](/schools/game).
 
 ## [The Site](#TheSite) {#TheSite}
 

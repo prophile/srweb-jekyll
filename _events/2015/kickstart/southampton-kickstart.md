@@ -11,12 +11,11 @@ dates:
     - ['2014-10-25', '10:00', '17:00']
 ---
 
-Who: Student Robotics teams.
+**Who:** Student Robotics teams.
 
-Food: There is a small Co-op and Sainsburys store nearby along Burgess road.
+**Food:** There is a small Co-op and Sainsburys store nearby along Burgess road.
 
-Parking: Parking is available north of [Building 32](http://data.southampton.ac.uk/building/32.html)
-   and next to [Building 67](http://data.southampton.ac.uk/building/67.html).
+**Parking:** Parking is available north of [Building 32](http://data.southampton.ac.uk/building/32.html) and next to [Building 67](http://data.southampton.ac.uk/building/67.html).
 
 Schedule
 --------

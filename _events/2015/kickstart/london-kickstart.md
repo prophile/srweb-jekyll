@@ -9,14 +9,11 @@ dates:
     - ['2014-10-25', '10:00', '17:00']
 ---
 
-Who: Student Robotics teams.
+**Who:** Student Robotics teams.
 
-Food: Nearby shops/cafes.
+**Food:** Nearby shops/cafes.
 
-Parking: Car park is available. Number plates are required at
-         least two weeks before the event. Please email
-         [Sam Phippen](mailto:sphippen@studentrobotics.org) with
-         your name, school/team name and number plate.
+**Parking:** Car park is available. Number plates are required at least two weeks before the event. Please email [Sam Phippen](mailto:sphippen@studentrobotics.org) with your name, school/team name and number plate.
 
 Schedule
 --------

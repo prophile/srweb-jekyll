@@ -138,7 +138,7 @@ module EventsSubsystem
 
                 cats = cats.split('/').drop(1)
                 # filter by year
-                next unless cats.include? "sr#{sr_year}"
+                next unless cats.include? "#{sr_year}"
                 # filter by branch
                 next unless event.data['branch'] == branch || branch == 'all'
                 # filter by type
