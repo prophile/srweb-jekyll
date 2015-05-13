@@ -16,6 +16,11 @@ module GeoLookup
             :lookup  => :google
         )
         response = Geocoder::search(query)
+
+        if response.empty?
+            raise "#{query.inspect} is not a real place"
+        end
+
         results = response[0].data
         File.write cache_file, JSON.generate(results)
         results
