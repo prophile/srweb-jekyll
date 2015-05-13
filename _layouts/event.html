@@ -11,11 +11,9 @@ layout: main
 <div itemscope itemtype="http://schema.org/EducationEvent">
   <h1>{{ page.title }}</h1>
 
-  <p><strong>What:</strong> <a itemprop="name" href="/events/{% event_type raw %}">{% event_type human %}</a></p>
+  <p><strong>What:</strong> <a itemprop="name" href="/events/{% event_type page raw %}">{% event_type page human %}</a></p>
 
-  <p><strong>When:</strong> <time itemprop="startDate" datetime="{% event_date page iso %}">{% if page.override.when %}{{ page.override.when }}{% else %}{% event_date page %}{% endif %}</time></p>
-
-  <meta itemprop="startDate" content="{% event_date page iso %}" />
+  <p><strong>When:</strong> <time itemprop="startDate" datetime="{% event_date page iso %}">{% event_date page human %}</time></p>
 
   <p itemprop="location" itemscope itemtype="http://schema.org/Place">
     <strong>Where:</strong> <span itemprop="name">{% if page.override.where %}{{ page.override.where }}{% else %}{% reverse_geocode page.location, address %} (see map for details){% endif %}</span>

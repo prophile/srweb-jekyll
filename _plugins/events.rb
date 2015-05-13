@@ -6,28 +6,23 @@ module EventsSubsystem
         def initialize(tag_name, text, options)
             super
 
-            @format = text.strip
+            tokens = text.split(' ')
+
+            @event_name = tokens[0].strip
+            @format = tokens[1].strip
         end
 
         def render(context)
-            type = context['page']['relative_path'].split('/')[-2]
+            event = context[@event_name]
+            type = event['relative_path'].split('/')[-2]
 
             case @format
-            when 'human'
-                type.gsub(/-/, ' ').titlecase
             when 'raw'
                 type
+            when 'human'
+                type.gsub(/-/, ' ').titlecase
             end
         end
-    end
-
-    def self.format_duration(times)
-        a = Time.parse(times[0])
-        b = Time.parse(times[1])
-
-        a_str = a.strftime('%l%P')
-        b_str = b.strftime('%l%P')
-        "#{a_str}-#{b_str}"
     end
 
     def self.format_human_date(days)
@@ -85,18 +80,16 @@ module EventsSubsystem
             super
 
             tokens = text.split(' ')
-            event_name = tokens[0]
 
-            format = tokens[1]
-            @event_name = if event_name.nil? || event_name.empty? then nil else event_name end
-            @format = if format.nil? || format.empty? then nil else format end
+            @event_name = tokens[0].strip
+            @format = tokens[1].strip
         end
 
         def render(context)
-            page = if @event_name then context[@event_name] else context['page'] end
-            m, slug = *page['relative_path'].match(MATCHER)
+            event = context[@event_name]
+            m, slug = *event['relative_path'].match(MATCHER)
 
-            date = Date.parse(page['dates'][0][0])
+            date = Date.parse(event['dates'][0][0])
 
             year = date.year
             month = date.month
@@ -108,8 +101,7 @@ module EventsSubsystem
             when "iso"
               EventsSubsystem::format_date_iso(year, month, day)
             when "human"
-            else
-              EventsSubsystem::format_human_datetime(page['dates'])
+              EventsSubsystem::format_human_datetime(event['dates'])
             end
         end
     end
