@@ -10,11 +10,10 @@ module GeoLookup
         hash = Digest::SHA1.hexdigest query.inspect
         cache_file = "#{CACHE_DIR}/#{hash}"
         return JSON.parse(File.read(cache_file)) if File.exists?(cache_file)
+
         puts "Querying for geo information on #{query.inspect}"
-        Geocoder::configure(
-            :timeout => 15,
-            :lookup  => :google
-        )
+
+        Geocoder::configure(:timeout => 15, :lookup => :google)
         response = Geocoder::search(query)
 
         if response.empty?
