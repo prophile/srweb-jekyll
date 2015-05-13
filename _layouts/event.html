@@ -13,6 +13,8 @@ layout: main
 
   <p><strong>What:</strong> <a itemprop="name" href="/events/{% event_type raw %}">{% event_type human %}</a></p>
 
+  <p><strong>When:</strong> <time itemprop="startDate" datetime="{% event_date page iso %}">{% if page.override.when %}{{ page.override.when }}{% else %}{% event_date page %}{% endif %}</time></p>
+
   <meta itemprop="startDate" content="{% event_date page iso %}" />
 
   <p itemprop="location" itemscope itemtype="http://schema.org/Place">

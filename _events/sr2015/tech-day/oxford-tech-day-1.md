@@ -9,9 +9,9 @@ override:
     where: >
         Building R27, Rutherford Appleton Laboratories, Harwell, Oxford, OX11 0QX<br />
         Please report to reception on arrival.
+dates:
+    - ['2015-02-21', '10:00', '17:00']
 ---
-
-When: 10am–5pm, 21<sup>st</sup> February 2015
 
 Who: All Student Robotics teams are welcome to attend.
      Please [inform](/about/contactus) us if your team is coming.

@@ -5,9 +5,10 @@ description: >
 layout: event
 location: The Racecourse Newbury
 hidemap: true
+dates:
+    - ['2015-04-25', '9:00', '17:30']
+    - ['2015-04-26', '9:00', '18:00']
 ---
-
-When: 25<sup>th</sup> and 26<sup>th</sup> April 2015.
 
 Who: All Student Robotics [teams](/teams/).  (Note, both days of the competition feature matches)
 

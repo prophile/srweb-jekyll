@@ -7,9 +7,9 @@ branch: Southampton
 location: Building 32, University of Southampton
 override:
     where: <a href="http://data.southampton.ac.uk/building/32.html">Building 32</a>, University of Southampton Highfield Campus
+dates:
+    - ['2014-10-25', '10:00', '17:00']
 ---
-
-When: 25<sup>th</sup> October 2014.
 
 Who: Student Robotics teams.
 

@@ -5,9 +5,9 @@ description: >
 layout: event
 branch: Bristol
 location: Merchant Venturers Building, University of Bristol
+dates:
+    - ['2014-12-06', '11:00', '17:00']
 ---
-
-When: 11:00AM - 5PM. 6<sup>th</sup> December 2014
 
 Who: All Student Robotics teams are welcome to attend.
   Please [inform](/about/contactus) us if your team is coming.

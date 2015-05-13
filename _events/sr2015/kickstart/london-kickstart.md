@@ -5,9 +5,9 @@ description: >
 layout: event
 branch: London
 location: Facebook London, 10 Brock St
+dates:
+    - ['2014-10-25', '10:00', '17:00']
 ---
-
-When: 25<sup>th</sup> October 2014.
 
 Who: Student Robotics teams.
 
@@ -31,7 +31,7 @@ Schedule
 
 ### Computing requirements
 
-Facebook is providing wifi but no computers. Please bring a
+Facebook is providing WiFi but no computers. Please bring a
 laptop computer that you can use to work with the kit throughout
 the day. Please email [Sam Phippen](mailto:sphippen@studentrobotics.org)
 if you are unable to bring a laptop, so that we can work out

@@ -5,9 +5,9 @@ description: >
 layout: event
 branch: Bristol
 location: Merchant Venturers Building, University of Bristol
+dates:
+    - ['2014-10-25', '10:00', '17:00']
 ---
-
-When: 25<sup>th</sup> October 2014.
 
 Who: Student Robotics teams.
 

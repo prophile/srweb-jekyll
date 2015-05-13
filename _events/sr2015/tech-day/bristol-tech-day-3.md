@@ -1,13 +1,13 @@
 ---
-title: Bristol Tech Day 2
+title: Bristol Tech Day 3
 description: >
-    A Bristol tech day on the 7th of February 2015.
+    A Bristol tech day on the 14th of March 2015.
 layout: event
 branch: Bristol
 location: Merchant Venturers Building, University of Bristol
+dates:
+    - ['2015-03-14', '11:00', '17:00']
 ---
-
-When: 11:00AM - 5PM. 7<sup>th</sup> February 2015
 
 Who: All Student Robotics teams are welcome to attend.
   Please [inform](/about/contactus) us if your team is coming.

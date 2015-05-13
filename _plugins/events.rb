@@ -21,20 +21,53 @@ module EventsSubsystem
         end
     end
 
-    def self.format_date(year, month, day)
-        year  = year.to_i
-        month = month.to_i
-        day   = day.to_i
+    def self.format_duration(times)
+        a = Time.parse(times[0])
+        b = Time.parse(times[1])
 
-        months = %w[?? January February March
-                    April May June
-                    July August September
-                    October November December]
-        suffix = %w[th st nd rd th th th th th th
-                    th th th th th th th th th th
-                    th st nd rd th th th th th th
-                    th st]
-        "#{day}<sup>#{suffix[day]}</sup> #{months[month]}, #{year}"
+        a_str = a.strftime('%l%P')
+        b_str = b.strftime('%l%P')
+        "#{a_str}-#{b_str}"
+    end
+
+    def self.format_human_date(days)
+        if days.size == 2
+            day1 = Date.parse(days[0][0])
+            day2 = Date.parse(days[1][0])
+
+            a = day1.strftime('%e')
+            b = day2.strftime('%e')
+            c = day1.strftime('%B %Y')
+
+            return "#{a}-#{b} #{c}"
+        elsif days.size == 1
+            date = Date.parse(days[0][0])
+            date.strftime('%e %B %Y')
+        else
+            raise "Unsupported date format."
+        end
+    end
+
+    def self.format_human_datetime(days)
+        content = []
+
+        for day in days
+            date = Date.parse(day[0])
+            start_time = Time.parse(day[1])
+            end_time = Time.parse(day[2])
+
+            if start_time == end_time
+                content << date.strftime('%e %B %Y')
+            else
+                a = start_time.strftime('%l:%M%P')
+                b = end_time.strftime('%l:%M%P').strip  # preceeding space
+                c = date.strftime('%e %B %Y')
+
+                content << "#{a}-#{b}, #{c}"
+            end
+        end
+
+        return content.join '<br />'
     end
 
     def self.format_date_ics(year, month, day)
@@ -46,7 +79,7 @@ module EventsSubsystem
     end
 
     class GetDate < Liquid::Tag
-        MATCHER = /^.*\/(\d+)-(\d+)-(\d+)-(.*)\..*$/
+        MATCHER = /^.*\/(.*)\..*$/
 
         def initialize(tag_name, text, options)
             super
@@ -61,7 +94,14 @@ module EventsSubsystem
 
         def render(context)
             page = if @event_name then context[@event_name] else context['page'] end
-            m, year, month, day, slug = *page['relative_path'].match(MATCHER)
+            m, slug = *page['relative_path'].match(MATCHER)
+
+            date = Date.parse(page['dates'][0][0])
+
+            year = date.year
+            month = date.month
+            day = date.day
+
             case @format
             when "ics"
               EventsSubsystem::format_date_ics(year, month, day)
@@ -69,13 +109,13 @@ module EventsSubsystem
               EventsSubsystem::format_date_iso(year, month, day)
             when "human"
             else
-              EventsSubsystem::format_date(year, month, day)
+              EventsSubsystem::format_human_datetime(page['dates'])
             end
         end
     end
 
     class HomeEvents < Liquid::Tag
-        MATCHER = /^(\/.+)*\/(\d+)-(\d+)-(\d+)-(.*)$/
+        MATCHER = /^(\/.+)*\/(.*)$/
         SYNTAX = /(.*)[[:blank:]]*,[[:blank:]]*(.*)[[:blank:]]*,[[:blank:]]*(.*)[[:blank:]]*,[[:blank:]]*(.*)/
 
         def initialize(tag_name, markup, options)
@@ -94,7 +134,8 @@ module EventsSubsystem
             content << '<ul>'
             matched_any = false
             context['site.events'].each do |event|
-                m, cats, year, month, day, slug = *event.cleaned_relative_path.match(MATCHER)
+                m, cats, slug = *event.cleaned_relative_path.match(MATCHER)
+
                 cats = cats.split('/').drop(1)
                 # filter by year
                 next unless cats.include? "sr#{sr_year}"
@@ -102,7 +143,7 @@ module EventsSubsystem
                 next unless event.data['branch'] == branch || branch == 'all'
                 # filter by type
                 next unless cats.include? @type
-                pretty_date = EventsSubsystem::format_date(year, month, day)
+                pretty_date = EventsSubsystem::format_human_date(event.data['dates'])
                 if @incl_locations.rstrip == "true" then
                     loc = event.data['location']
                     search_data = GeoLookup::lookup(loc)

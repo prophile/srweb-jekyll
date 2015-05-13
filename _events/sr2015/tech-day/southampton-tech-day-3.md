@@ -7,9 +7,9 @@ branch: Southampton
 location: Building 25, University of Southampton
 override:
     where: <a href="http://data.southampton.ac.uk/building/25.html">Building 25</a>, University of Southampton Highfield Campus
+dates:
+    - ['2015-03-14', '10:00', '17:00']
 ---
-
-When: 10am–5pm, 14<sup>th</sup> March 2015
 
 Who: All Student Robotics teams are welcome to attend.
   Please [inform](/about/contactus) us if your team is coming.
