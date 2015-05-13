@@ -1,4 +1,9 @@
+# A layer providing helping docs tags.
 module DocsSubsystem
+
+  # A tag for displaying the hierarchical index of the docs.
+  #
+  # Accepts a single argument being the document leader.
   class HierarchicalIndexTag < Liquid::Tag
     def initialize(tag_name, leader, tokens)
       super
@@ -60,4 +65,3 @@ module DocsSubsystem
 end
 
 Liquid::Template.register_tag('docs_hierarchical_index', DocsSubsystem::HierarchicalIndexTag)
-

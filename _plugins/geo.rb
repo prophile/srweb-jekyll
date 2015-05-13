@@ -1,6 +1,15 @@
+# A layer providing geocoding tags.
 module GeoSubsystem
     SYNTAX = /([[:graph:]]*)[[:blank:]]*,[[:blank:]]*([[:graph:]]*)/
 
+    # A tag representing a reverse geocode of an address and outputting the
+    # result in a particular format.
+    #
+    # Accepts two arguments:
+    # * The address query.
+    # * (A comma.)
+    # * The output format. One of 'address', 'html_address', 'geo',
+    #                      'address_meta', 'geo_meta'.
     class ReverseGeocode < Liquid::Tag
         def initialize(tag_name, text, options)
             super

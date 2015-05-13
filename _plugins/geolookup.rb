@@ -2,9 +2,13 @@ require 'geocoder'
 require 'digest/sha1'
 require 'json'
 
+
+# A subsystem for providing geographical lookups with local caching.
 module GeoLookup
     CACHE_DIR = "/tmp/jekyll-geo-cache"
 
+    # Lookup an address and return the result.
+    # The results are cached approriately on your local disk.
     def self.lookup(query)
         Dir.mkdir(CACHE_DIR) if not Dir.exists?(CACHE_DIR)
         hash = Digest::SHA1.hexdigest query.inspect

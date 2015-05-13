@@ -1,4 +1,6 @@
 module TroubleshooterChecker
+
+    # A Jekyll generator which checks the integrity of the troubleshooter.
     class TroubleshooterChecker < Jekyll::Generator
         def check_data(troubleshooter)
             questions = troubleshooter['questions']
@@ -16,5 +18,5 @@ module TroubleshooterChecker
             check_data(site.data['troubleshooter'])
         end
     end
-end
 
+end

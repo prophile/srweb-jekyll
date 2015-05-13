@@ -1,7 +1,15 @@
 require 'geocoder'
 require 'facets/string/titlecase'
 
+
+# A thin layer on top of Jekyll collections to represent an events subsystem.
 module EventsSubsystem
+
+    # A Liquid tag which gets the type of the event.
+    #
+    # Accepts two arguments separated by a space:
+    # * The name of the variable holding the event.
+    # * The format of the result. One of 'human' or 'raw'.
     class GetEventType < Liquid::Tag
         def initialize(tag_name, text, options)
             super
@@ -25,6 +33,7 @@ module EventsSubsystem
         end
     end
 
+    # Format the dates in an event with 'human' output.
     def self.format_human_date(days)
         if days.size == 2
             day1 = Date.parse(days[0][0])
@@ -43,6 +52,7 @@ module EventsSubsystem
         end
     end
 
+    # Format the dates in an event with 'human' output, and include the times.
     def self.format_human_datetime(days)
         content = []
 
@@ -65,14 +75,21 @@ module EventsSubsystem
         return content.join '<br />'
     end
 
+    # Format the dates in an event with 'ics' output.
     def self.format_date_ics(year, month, day)
         "#{year}#{month}#{day}"
     end
 
+    # Format the dates in an event with 'ISO' output.
     def self.format_date_iso(year, month, day)
         '%02i-%02i-%02i' % [year, month, day]
     end
 
+    # A Liquid tag which gets the date of the event.
+    #
+    # Accepts two arguments separated by a space:
+    # * The name of the variable holding the event.
+    # * The format of the result. One of 'human', 'ics' or 'iso'.
     class GetDate < Liquid::Tag
         MATCHER = /^.*\/(.*)\..*$/
 
@@ -106,6 +123,13 @@ module EventsSubsystem
         end
     end
 
+    # A Liquid tag which outputs a list of events.
+    #
+    # Accepts four arguments separated by a space:
+    # * The type of the events.
+    # * The branch to show events for.
+    # * The string to display when there are no events.
+    # * Whether or not to include the locations.
     class HomeEvents < Liquid::Tag
         MATCHER = /^(\/.+)*\/(.*)$/
         SYNTAX = /(.*)[[:blank:]]*,[[:blank:]]*(.*)[[:blank:]]*,[[:blank:]]*(.*)[[:blank:]]*,[[:blank:]]*(.*)/
