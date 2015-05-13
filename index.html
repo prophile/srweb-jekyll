@@ -13,15 +13,35 @@ itemtype: http://schema.org/WebSite
     $("#date_tabs").tabs();
   });
 </script>
+
+<!-- Start homepage video. -->
+<script id="videoPlayerHTML" type="text/html">
+  <iframe id="videoPlayer" width="960" height="540"
+    src="https://www.youtube-nocookie.com/embed/SRgzY5sUYQ8?autoplay=1&amp;rel=0&amp;showinfo=0"
+    frameborder="0" allowfullscreen>
+  </iframe>
+</script>
+
 <div id="topBanner">
-  <img src="/images/content/srobo_website_robot.png" alt="Image of Robot">
-  <h1>Welcome to <span itemprop="name">Student Robotics</span></h1>
-  <p itemprop="description">Student Robotics is an exciting annual competition
-   that challenges teams of <span itemprop="typicalAgeRange">16-18</span>
-   year-olds to build fully autonomous robots. Participating teams must
-   design, build and test their robots, ready to compete against other
-   teams.</p>
+  <!-- videoPlayerHTML is placed here -->
+
+  <div class="overlayText">
+    <h1>Welcome to Student Robotics</h1>
+
+    <p>
+      Student Robotics is an exciting annual competition that challenges teams
+      of 16-18 year-olds to build fully autonomous robots. Participating teams
+      must design, build and test their robots, ready to compete against other
+      teams.
+    </p>
+
+    <p><a class="playActionLink" href="https://www.youtube.com/watch?v=SRgzY5sUYQ8">Watch video</a></p>
+  </div>
 </div>
+
+<script type="text/javascript" src="/js/home-page-video.js"></script>
+<!-- End homepage video. -->
+
 <div id="latestNews">
   {% assign post = site.posts.first %}
   <h2>{{ post.title }}</h2>
@@ -103,4 +123,3 @@ itemtype: http://schema.org/WebSite
     </div>
   </div>
 </div>
-

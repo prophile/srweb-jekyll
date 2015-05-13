@@ -10,36 +10,64 @@ div.content p {
 }
 
 div.content div#topBanner {
-	background:url('../images/template/banner_bg.png') no-repeat;
-	height:236px;
+	position: relative;
+	background: url('../images/template/sr2014-youtube-video-shot.jpg');
+	background-size: cover;
+	background-position: 50% 50%, center;
+	width: 960px;
+	height: 300px;
+	overflow: hidden;
+
+	transition: 0.5s ease-in-out 0.5s;
 }
 
-div.content div#topBanner img {
-	overflow:visible;
-	float:left;
-	margin-top: -44px;
+div.content div#topBanner.expanded {
+	height: 540px;
+	transition: 0.5s ease-in-out 0.5s;
+}
+
+div.content div#topBanner.expanded .overlayText {
+	display: none;
+}
+
+div.content .overlayText {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+
+	display: -webkit-flex;
+	display: flex;
+
+	-webkit-align-items: center;
+	        align-items: center;
+	-webkit-flex-direction: column;
+	        flex-direction: column;
+	-webkit-justify-content: center;
+	        justify-content: center;
+
+	text-align: center;
+	text-shadow: 0 0 1em black;
+	background-color: rgba(0, 0, 0, 0.6);
+	color: white;
+}
+
+div.content .overlayText .playActionLink {
+	font-size: 20px;
 }
 
 div.content div#topBanner h1 {
 	font-size:30px;
 	line-height:40px;
-	color:white;
 	font-weight:normal;
-	width:500px;
-	float:right;
-	margin-right:50px;
-	margin-top:10px;
-	margin-bottom:0px;
-	clear:none;
+	color: white;
 }
 
 div.content div#topBanner p {
-	color:white;
-	width:500px;
-	float:right;
-	margin-right:30px;
-	margin-top: 0;
-	text-align:left;
+	margin: 20px 20px 0 20px;
+
+	text-align: center;
 	line-height: 24px;
 }
 
