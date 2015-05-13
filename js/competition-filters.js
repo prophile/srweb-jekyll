@@ -2,25 +2,35 @@
 var UNKNOWABLE_TEAM = "???";
 var competitionFilters = angular.module('competitionFilters', []);
 
-/// Replaces a plain TLA with an actual team name
-competitionFilters.filter('teamName', function($log) {
+/// Gets the team info for a given TLA
+competitionFilters.filter('teamInfo', function($log) {
     var empty_corner_symbol = EMPTY_CORNER_SYMBOL;
     var unknowable_team = UNKNOWABLE_TEAM;
 
-    return function(tla, teams, name_only) {
+    return function(tla, teams) {
         if (teams == null || !(tla in teams)) {
-            if (tla != empty_corner_symbol && tla != unknowable_team) {
+            if (tla && tla != empty_corner_symbol && tla != unknowable_team) {
                 $log.warn('No information for team: ' + tla);
             }
             return tla;
         }
-        name_only = name_only || false;
         var info = teams[tla];
-        var name = info.team_name || info.college.name;
-        if (name_only) {
-            return name;
+        return info;
+    };
+});
+
+/// Replaces a team info object with an actual team name
+competitionFilters.filter('teamName', function($log) {
+    return function(info, name_only) {
+        if (typeof(info) == 'string' || !info) {
+            // it's a TLA or some other thing we can't do much with
+            return info;
         }
-        return tla + ": " + name;
+        name_only = name_only || false;
+        if (name_only) {
+            return info.name;
+        }
+        return info.tla + ": " + info.name;
     };
 });
 
@@ -28,12 +38,6 @@ competitionFilters.filter('teamName', function($log) {
 competitionFilters.filter('containsTeam', function() {
     // implemented in competition-utils.js
     return matches_for_team;
-});
-
-/// Exclude matches which have already happened
-competitionFilters.filter('unspentMatches', function() {
-    // implemented in competition-utils.js
-    return unspent_matches;
 });
 
 /// Convert the text to title case
@@ -45,7 +49,7 @@ competitionFilters.filter('titleCase', function() {
             parts[i] = word[0].toUpperCase() + word.substring(1).toLowerCase();
         }
         return parts.join(" ");
-    }
+    };
 });
 
 /// Convert the text to title case

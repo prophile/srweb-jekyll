@@ -6,48 +6,30 @@ var EMPTY_CORNER_SYMBOL = '-';
 // to hide 'old' matches
 var MAX_MATCH_AGE = 15 * 60; // 15 minutes in seconds
 
-var create_follower = function() {
-    return function($interval, resource, delay) {
-        return {
-            "get": function(cb) {
-                resource.get(cb);
-            },
-            "follow": function(cb, delay_override) {
-                var fetch = function() {
-                    resource.get(cb);
-                };
-                $interval(fetch, delay_override || delay);
-                fetch();
-            }
-        };
+var compute_offset = function() {
+    return function(then, now) {
+        now = now || new Date();
+        return now - then;
     };
 }();
 
-var get_current_session = function() {
-    return function(sessions, current) {
-        if (current == null) {
-            return null;
-        }
-        for (var i=0; i<sessions.length; i++) {
-            var session = sessions[i];
-            var matches = session.matches;
+var apply_offset = function() {
+    return function(offset, now) {
+        now = now || new Date();
+        return new Date(now.valueOf() - offset);
+    };
+}();
 
-            if (matches.length == 0) {
-                continue;
-            }
-
-            var first_match = matches[0];
-            if (first_match.num > current) {
-                continue;
-            }
-
-            var last_match = matches[matches.length-1];
-            if (last_match.num < current) {
-                continue;
-            }
-
-            return session;
-        }
+var create_follower = function() {
+    return function($interval, resource, delay) {
+        resource.follow = function(cb, delay_override) {
+            var fetch = function() {
+                resource.get(cb);
+            };
+            $interval(fetch, delay_override || delay);
+            fetch();
+        };
+        return resource;
     };
 }();
 
@@ -72,92 +54,11 @@ var hex_to_rgba = function() {
     };
 }();
 
-var games_for_team = function() {
-    return function(all_matches, team) {
-        if (all_matches == null || team == null) {
-            return [];
-        }
-        var games = [];
-        for (var i=0; i<all_matches.length; i++) {
-            var match = all_matches[i];
-            for (var arena in match) {
-                var game = match[arena];
-                // contains
-                if (game.teams.indexOf(team) != -1) {
-                    games.push(game);
-                }
-            }
-        }
-        return games;
-    };
-}();
-
-var league_sorter = function() {
-    var _game_points = null;
-
-    var sort_helper = function(a, b) {
-        var val = b.points - a.points;
-        if (val == 0) {
-            a_game = _game_points[a.tla];
-            b_game = _game_points[b.tla];
-            return b_game - a_game;
-        }
-        return val;
-    };
-
-    var display_convert = function(rows, cutoff) {
-        var last_score = 0;
-        var last_pos = 1;
-        for (var i=0; i<rows.length; i++) {
-            var row = rows[i];
-            if (row.points == last_score) {
-                row.pos = '';
-            } else {
-                last_score = row.points;
-                last_pos = row.pos = i+1;
-            }
-        }
-        if (cutoff != null && rows.length > cutoff) {
-            rows.splice(cutoff, 0, {'tla': '-', 'points': '-', 'pos': '-'});
-        }
-    };
-
-    return function(league_points, cutoff, game_points) {
-        var rows = [];
-        _game_points = game_points;
-
-        for (var tla in league_points) {
-            var pts = league_points[tla];
-            rows.push({'tla': tla, 'points': pts});
-        }
-        rows.sort(sort_helper);
-        display_convert(rows, cutoff);
-        return rows;
-    };
-}();
-
-var gamepoints_sorter = function() {
-    var sort_helper = function(a, b) {
-        return a.tla.localeCompare(b.tla);
-    };
-
-    return function(points) {
-        var rows = [];
-
-        for (var tla in points) {
-            var pts = points[tla];
-            rows.push({'tla': tla, 'points': pts});
-        }
-        rows.sort(sort_helper);
-        return rows;
-    };
-}();
-
 var convert_matches = function() {
-    return function(matches) {
+    return function(matches, arenas) {
         var output = [];
         for (var i=0; i<matches.length; i++) {
-            output.push(match_converter(matches[i]));
+            output.push(match_converter(matches[i], arenas));
         }
         return output;
     };
@@ -182,20 +83,86 @@ var ensure_whole_arena = function() {
 }();
 
 var match_converter = function() {
-    var convert_time = function(time_str) {
-        var date = new Date(time_str);
-        return date;
-    };
-    return function(match) {
+    var teams_per_arena = TEAMS_PER_ARENA;
+    return function(match, arenas) {
         var output = { 'teams': [] };
+        // Get initial data from the first game in the match
         for (var arena in match) {
             var detail = match[arena];
             output.num = detail.num;
-            output.time = convert_time(detail.start_time);
-            var arena_teams = ensure_whole_arena(detail.teams);
+            output.display_name = detail.display_name;
+            output.time = new Date(detail.times.slot.start);
+            output.end_time = new Date(detail.times.slot.end);
+            break;
+        }
+        // Get teams data by iterating over the arenas, thus ensuring
+        // that all the arenas are properly represented.
+        for (var arena in arenas) {
+            var detail = match[arena];
+            var arena_teams;
+            if (detail) {
+                arena_teams = ensure_whole_arena(detail.teams);
+            } else {
+                // array of given size containing 'undefined' elements
+                arena_teams = new Array(teams_per_arena);
+            }
             output.teams = output.teams.concat(arena_teams);
         }
         return output;
+    };
+}();
+
+var group_matches = function() {
+    return function(all_games) {
+        var matches = [];
+        if (all_games.length == 0) {
+            return matches;
+        }
+        var last_num = all_games[0].num;
+        var match = {};
+        for (var i=0; i<all_games.length; i++) {
+            var game = all_games[i];
+            if (last_num != game.num) {
+                matches.push(match);
+                match = {};
+                last_num = game.num;
+            }
+            match[game.arena] = game;
+        }
+        matches.push(match);
+        return matches;
+    };
+}();
+
+var build_sessions = function() {
+    return function(data, cb) {
+        if (data.arenas == null || data.matches == null || data.periods == null) {
+            // can't do anything, but don't worry -- we'll get called
+            // again once we have the data
+            return;
+        }
+
+        var all_matches = group_matches(data.matches);
+
+        var sessions = [];
+        for (var i=0; i<data.periods.length; i++) {
+            var period = data.periods[i];
+            var matches = [];
+            if (period.matches) {
+                matches = all_matches.slice(period.matches.first_num,
+                                            period.matches.last_num + 1);
+                matches = convert_matches(matches, data.arenas);
+            }
+            sessions.push({
+                'arenas': data.arenas,
+                'description': period.description,
+                'start_time': new Date(period.start_time),
+                'end_time': new Date(period.end_time),
+                'max_end_time': new Date(period.max_end_time),
+                'matches': matches
+            });
+        }
+        cb(sessions);
     };
 }();
 
@@ -204,14 +171,10 @@ var matches_for_team = function() {
         if (input == null || team == null || team.length == 0) {
             return input;
         }
-        var output = [];
-        for (var i=0; i<input.length; i++) {
-            var match = input[i];
+        var output = input.filter(function(game) {
             // contains
-            if (match.teams.indexOf(team) >= 0) {
-                output.push(match);
-            }
-        }
+            return game.teams.indexOf(team) != -1;
+        });
         return output;
     };
 }();
@@ -236,13 +199,9 @@ var unspent_matches = function() {
             return [];
         }
 
-        var output = [];
-        for (var i=0; i<matches.length; i++) {
-            var match = matches[i];
-            if (match.time > when) {
-                output.push(match);
-            }
-        }
+        var output = matches.filter(function(match) {
+            return match.time > when;
+        });
         return output;
     };
     return function(sessions, hideOldMatches) {
@@ -269,22 +228,14 @@ var unspent_matches = function() {
 }();
 
 var process_knockout_round = function() {
-    var describe_match = function(num_in_round, match_num, rounds_after_this) {
-        var description = "Match " + match_num;
-        if (rounds_after_this == 2) {
-            description = "Quarter " + num_in_round + " (#" + match_num + ")";
-        }
-        if (rounds_after_this == 1) {
-            description = "Semi " + num_in_round + " (#" + match_num + ")";
-        }
-        if (rounds_after_this == 0) {
-            description = "Final (#" + match_num + ")";
-        }
-        return description;
-    };
     var build_game = function(info) {
+        var ranking = {};
+        if (info.scores) {
+            ranking = info.scores.ranking;
+        }
         return {
             "arena": info.arena,
+            "ranking": ranking,
             "teams": ensure_whole_arena(info.teams)
         };
     };
@@ -306,28 +257,29 @@ var process_knockout_round = function() {
         }
 
         return game_groups;
-    }
-    return function(round, rounds_after_this) {
+    };
+    return function(round) {
 
         var game_groups = group_games(round);
 
         var matches = [];
         for (var i=0; i<game_groups.length; i++) {
             var match_games = game_groups[i];
-            var number, time;
+            var number, description, time;
             var game_details = [];
             for (var j=0; j<match_games.length; j++) {
                 var game = match_games[j];
                 if (j == 0) {
                     number = game.num;
-                    time = new Date(game.start_time);
+                    description = game.display_name;
+                    time = new Date(game.times.slot.start);
                 }
                 game_details.push(build_game(game));
             }
 
             matches.push({
                 'num': number,
-                'description': describe_match(i, number, rounds_after_this),
+                'description': description,
                 'time': time,
                 'games': game_details
             });
@@ -337,20 +289,24 @@ var process_knockout_round = function() {
 }();
 
 var process_knockouts = function() {
-    return function(rounds) {
+    return function(rounds, tiebreaker) {
         var output = [];
         for (var i=0; i<rounds.length; i++) {
-            var rounds_after_this = rounds.length - i - 1;
-            output.push(process_knockout_round(rounds[i], rounds_after_this));
+            output.push(process_knockout_round(rounds[i]));
         }
+
+        if (tiebreaker) {
+            output.push(process_knockout_round([tiebreaker]));
+        }
+
         return output;
-    }
+    };
 }();
 
 // node require() based exports.
 if (typeof(exports) != 'undefined') {
-    exports.league_sorter = league_sorter;
-    exports.gamepoints_sorter = gamepoints_sorter;
+    exports.compute_offset = compute_offset;
+    exports.apply_offset = apply_offset;
     exports.match_converter = match_converter;
     exports.convert_matches = convert_matches;
     exports.matches_for_team = matches_for_team;

@@ -1,0 +1,9 @@
+[submodule "js/lib/angularjs-ordinal-filter"]
+	path = js/lib/angularjs-ordinal-filter
+	url = git://github.com/jdpedrie/angularjs-ordinal-filter.git
+[submodule "js/lib/ui-select2"]
+	path = js/lib/angular-ui-select2
+	url = git://github.com/angular-ui/ui-select2.git
+[submodule "js/lib/ngStorage"]
+	path = js/lib/angular-storage
+	url = git://github.com/gsklee/ngStorage.git

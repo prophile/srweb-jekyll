@@ -2,9 +2,18 @@
 var app = angular.module('competitionResources', ["ngResource"]);
 
 app.factory("Teams", function($interval, $resource) {
-    // SRWEB_ROOT ends with a /, unlike API_ROOT.
-    var resource = $resource(SRWEB_ROOT + "teams-data.php");
-    return create_follower($interval, resource, 10*60*1000);
+    return $resource(API_ROOT + "/teams", {}, {
+        getList: { method: 'GET', interceptor: {
+            response: function(response) {
+                var teams = response.data.teams;
+                var teams_list = [];
+                for (var tla in teams) {
+                    teams_list.push(teams[tla]);
+                }
+                return teams_list;
+            }
+        }}
+    });
 });
 
 app.factory("State", function($interval, $resource) {
@@ -39,49 +48,65 @@ app.factory("LeagueScores", function($resource) {
     return $resource(API_ROOT + "/scores/league");
 });
 
-app.factory("AllMatches", function($resource) {
-    return $resource(API_ROOT + "/matches/all");
+app.factory("LastScoredMatch", function($resource) {
+    return $resource(API_ROOT + "/matches/last_scored");
 });
 
-app.factory("MatchPeriods", function($resource) {
-    var build_sessions = function(nodes) {
-        var sessions = [];
-        for (var i=0; i<nodes.periods.length; i++) {
-            var period = nodes.periods[i];
-            var matches = convert_matches(period.matches);
-            sessions.push({
-                'description': period.description,
-                'matches': matches
-            });
-        }
-        return sessions;
+app.factory("AllMatches", function($resource) {
+    return $resource(API_ROOT + "/matches");
+});
+
+app.factory("MatchPeriods", function($resource, Arenas, AllMatches) {
+    var res = $resource(API_ROOT + "/periods");
+    res.getSessions = function(cb) {
+        var data = {};
+        Arenas.get(function(nodes) {
+            data.arenas = nodes.arenas;
+            build_sessions(data, cb);
+        });
+        AllMatches.get(function(nodes) {
+            data.matches = nodes.matches;
+            build_sessions(data, cb);
+        });
+        res.get(function(nodes) {
+            data.periods = nodes.periods;
+            build_sessions(data, cb);
+        });
     };
-    return $resource(API_ROOT + "/matches/periods", {}, {
-        getSessions: {method: "GET", interceptor: {
-            response: function(response) {
-                return build_sessions(response.data);
-            }
-        }}
-    });
+    return res;
 });
 
 app.factory("KnockoutMatches", function($resource) {
-    return $resource(API_ROOT + "/matches/knockouts");
+    return $resource(API_ROOT + "/knockout");
 });
 
-app.factory("CurrentMatchFactory", function($resource) {
-    return function(arena) {
-        var args = {arenaId: arena};
-        return $resource(API_ROOT + "/matches/:arenaId/current", args);
-    }
+app.factory('Tiebreaker', function($resource) {
+    return $resource(API_ROOT + '/tiebreaker');
 });
 
-app.factory("MatchesFactory", function($resource) {
-    return function(arena, numbers) {
-        if (Object.prototype.toString.call(numbers) === '[object Array]' ) {
-            numbers = numbers.join(',');
-        }
-        var encoded_numbers = encodeURIComponent(numbers);
-        return $resource(API_ROOT + "/matches/" + arena + "?numbers=" + encoded_numbers);
-    }
+app.factory("Current", function($interval, $resource) {
+    var resource = $resource(API_ROOT + "/current", {}, {
+        'get': { method: 'GET', interceptor: {
+            response: function(response) {
+                var data = response.data;
+                var time = data.time = new Date(data.time);
+                data.offset = compute_offset(time);
+                return data;
+            }
+        }},
+        'getMatch': { method: 'GET', interceptor: {
+            response: function(response) {
+                return response.data.matches;
+            }
+        }},
+        'getTime': { method: 'GET', interceptor: {
+            response: function(response) {
+                return new Date(response.data.time);
+            }
+        }}
+    });
+    // helper which applies the offset value generated above
+    resource.timeFromOffset = apply_offset;
+    // 10 seconds follower
+    return create_follower($interval, resource, 10*1000);
 });

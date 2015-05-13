@@ -1,92 +1,130 @@
 
-var app = angular.module('app', ["competitionFilters", "competitionResources"]);
+var app = angular.module('app', ["competitionFilters", "competitionResources", "ordinal"]);
 
-app.controller("CompMode", function($scope, Arenas, AllMatches, LeagueScores, MatchesFactory, State, Teams) {
+app.controller("CompMode", function($scope, $interval, $log, Arenas, AllMatches, Current, State, Teams) {
 
+    $scope.matches = [];
+    // NB: These must be inited to objects, see below
     $scope.upcoming_match = {};
     $scope.next_match = {};
     $scope.current_match = {};
     $scope.previous_match = {};
 
-    Teams.follow(function(teams) {
-        $scope.teams = teams;
+    var grouped_matches = [];
+
+    var first_value = function(map) {
+        for (var k in map) {
+            return map[k];
+        }
+    };
+
+    // Each of the _match items is used within an 'include'. These work
+    // by creating a new scope upfront, taking a reference to the value
+    // within the named item. As a result, we need to update the original
+    // value rather than just replacing it.
+    // See http://stackoverflow.com/a/15937197/67873 for a more detailed
+    // explanation.
+    var set_match_info = function(name, games) {
+        var info = $scope[name];
+        if (!games) {
+            info.exists = false;
+            info.num = null;
+            info.display_name = null;
+            info.games = null;
+        } else {
+            info.exists = true;
+            var game = first_value(games);
+            info.num = game.num;
+            info.display_name = game.display_name;
+            info.games = games;
+        }
+    };
+
+    $scope.time_offset = 0;
+    Current.follow(function(nodes) {
+        $scope.time_offset = nodes.offset;
+        var grouped = group_matches(nodes.matches);
+        set_match_info('current_match', grouped[0]);
     });
 
-    // because this changes as a result of two things, do our own updating.
-    // Idealy this would be a filter in the template, but that didn't want
-    // to work easily.
-    var all_matches = [];
-    var next_match = 0;
-    var refresh = function() {
-        var low = Math.max(0, next_match-2);
-        $scope.matches = all_matches.slice(low, low+10);
-    };
+    $interval(function() {
+        var now = Current.timeFromOffset($scope.time_offset);
 
-    // update our current/next information all the time
-    // it will change as time passes, even if the state revision doesn't
-    var store_map = {
-        "previous": "previous_match",
-        "current": "current_match",
-        "next": "next_match",
-        "next+1": "upcoming_match"
-    };
-    var updateState = function(MatchState, arena) {
-        MatchState.get(function(matches) {
-            matches = matches.matches;
-            for (var i=0; i<matches.length; i++) {
-                var match = matches[i];
-                if (match.query == "next") {
-                    next_match = match.num;
-                }
-                if (match.query in store_map) {
-                    var name = store_map[match.query];
-                    var item = null, num = null;
-                    if (!match.error) {
-                        item = match;
-                        num = match.num;
-                    }
-                    if ($scope[name].games == null) {
-                        $scope[name].games = {};
-                    }
-                    $scope[name].games[arena] = item;
-                    // TODO: avoid storing this in two places
-                    // done for the moment to achieve a minimal patch
-                    $scope[name].num = num;
-                    $scope[name + "_number"] = num;
-                }
-            }
-            refresh();
+        var previous_matches = grouped_matches.filter(function(game_map) {
+            var game = first_value(game_map);
+            return new Date(game.times.slot.end) < now;
         });
-    };
+        // last one
+        var previous_match = previous_matches[previous_matches.length - 1];
+        set_match_info('previous_match', previous_match);
+
+        var upcoming_matches = grouped_matches.filter(function(game_map) {
+            var game = first_value(game_map);
+            return new Date(game.times.slot.start) > now;
+        });
+
+        set_match_info('next_match', upcoming_matches[0]);
+        set_match_info('upcoming_match', upcoming_matches[1]);
+    }, 100);
 
     // update the data only when the state changes
     State.change(function() {
+        var data = {};
+        function set_matches(data) {
+            if (data.matches == null || data.arenas == null) {
+                // don't have all the data yet, wait until we do (we'll
+                // be called again when that happens).
+                return;
+            }
+
+            all_matches = data.matches;
+            grouped_matches = group_matches(all_matches);
+            $scope.matches = convert_matches(grouped_matches, data.arenas);
+            $scope.arenas = data.arenas;
+        }
+
+        Arenas.get(function(nodes) {
+            data.arenas = nodes.arenas;
+            set_matches(data);
+        });
+
+        Teams.get(function(nodes) {
+            $scope.teams = nodes.teams;
+        });
+
         // TODO: consider getting only the matches of interest,
         // once there's an easy way to do this for all arenas at once.
         AllMatches.get(function(nodes) {
-            all_matches = convert_matches(nodes.matches);
-            refresh();
-        });
-
-        LeagueScores.get(function(points) {
-            var league_points = league_sorter(points.league_points, null, points.game_points);
-            $scope.league_points = league_points.slice(0, 10);
+            data.matches = nodes.matches;
+            set_matches(data);
         });
     });
+});
 
-    Arenas.get(function(nodes) {
-        $scope.arenas = nodes.arenas;
-        var per_arena = function(arena) {
-            var MatchState = MatchesFactory(arena, "previous,current,next,next+1");
-            var update = function() {
-                updateState(MatchState, arena);
-            };
-            // refresh every 10s
-            setInterval(update, 10000);
-            update();
-        };
-        for (var i=0; i<$scope.arenas.length; i++) {
-            per_arena($scope.arenas[i]);
+app.filter("matchesEndingAfterNow", function(Current) {
+    return function(matches, time_offset) {
+        if (!matches) {
+            return [];
         }
-    });
+        var now = Current.timeFromOffset(time_offset);
+        return matches.filter(function(match) {
+            return match.end_time > now;
+        });
+    };
+});
+
+app.filter("leaderboard", function() {
+    return function(teams, limit) {
+        var output = [];
+        for (var tla in teams) {
+            output.push(teams[tla]);
+        }
+        output.sort(function(a, b) {
+            return a.league_pos - b.league_pos;
+        });
+        if (limit) {
+            output = output.slice(0, limit);
+        }
+        return output;
+    };
 });

@@ -23,23 +23,27 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="{{ site.url }}{{ page.url }}" />
 
-    {% if site.sr.competition %}
-    <script src="/js/angular.min.js"></script>
-    <script src="/js/angular-resource.min.js"></script>
-
-    {% raw %}
+    {% if site.sr.competition or page.competition %}
     <script>
         var SRWEB_ROOT = "/";
-        var API_ROOT = "/comp-api";
+		var API_ROOT = "{{ site.srcomp_api_root }}";
     </script>
-    {% endraw %}
 
+	<script src="/js/polyfill.js"></script>
     <script src="/js/competition-utils.js"></script>
+    <!-- jquery is included in search.min.js -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/3.4.5/select2.min.js"></script>
+    <script src="/js/angular.min.js"></script>
+    <script src="/js/angular-resource.min.js"></script>
+	<script src="/js/lib/angular-storage/ngStorage.min.js"></script>
+	<script src="/js/lib/angular-ui-select2/src/select2.js"></script>
+	<script src="/js/lib/angularjs-ordinal-filter/ordinal-browser.js"></script>
     <script src="/js/competition-filters.js"></script>
     <script src="/js/competition-resources.js"></script>
-    <script src="/js/controllers/CompMode.js"></script>
+	{% if page.angular_controller %}
+	<script src="/js/controllers/{{ page.angular_controller }}.js"></script>
+	{% endif %}
 
-    <!-- jquery is included in search.min.js -->
     <script src="/js/jquery-ui.min.js"></script>
 
     <link rel="stylesheet" href="/css/comp.css">
@@ -84,11 +88,10 @@
       </script>
     {% endif %}
   </head>
-  {% if page.itemtype %}
-  <body itemscope itemtype="{{ page.itemtype }}">
-  {% else %}
-  <body>
-  {% endif %}
+  
+  <body {% if page.itemtype %} itemscope itemtype="{{ page.itemtype }}"{% endif %}
+    {% if page.angular_controller %} ng-app="{{ angular_controller }}" {% endif %}
+    >
     {% if site.tracking %}
     <noscript><p><img src="http://www.studentrobotics.org/piwik/piwik.php?idsite=1" style="border:0" alt="" /></p></noscript>
     {% endif %}

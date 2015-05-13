@@ -35,6 +35,8 @@ sr:
     - Southampton
   competition: false # is there a competition live right now?
 
+srcomp_api_root: http://localhost:5112/comp-api/
+
 tracking: false
 
 gems:
