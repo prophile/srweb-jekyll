@@ -4,7 +4,7 @@ description: >
     A Bristol tech day on the 30th of November 2013.
 layout: event
 branch: Bristol
-location: Merchant Venturers Building, University of Bristol
+location: Merchant Venturers Building, Bristol
 dates:
     - ['2013-11-30', '11:00', '17:00']
 ---

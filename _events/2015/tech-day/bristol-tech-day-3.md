@@ -4,7 +4,7 @@ description: >
     A Bristol tech day on the 14th of March 2015.
 layout: event
 branch: Bristol
-location: Merchant Venturers Building, University of Bristol
+location: Merchant Venturers Building, Bristol
 dates:
     - ['2015-03-14', '11:00', '17:00']
 ---

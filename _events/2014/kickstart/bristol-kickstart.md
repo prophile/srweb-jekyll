@@ -4,7 +4,7 @@ description: >
     The Bristol KickStart on the 12th of October 2013.
 layout: event
 branch: Bristol
-location: Merchant Venturers Building, University of Bristol
+location: Merchant Venturers Building, Bristol
 dates:
     - ['2013-10-12', '10:45', '17:30']
 ---
